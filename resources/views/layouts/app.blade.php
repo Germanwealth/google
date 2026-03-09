@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Flare Spark Global - Premium Financial Management Platform">
+    <title>@yield('title', 'Flare Spark Global')</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #7C3AED;
+            --secondary: #A78BFA;
+            --accent: #FCD34D;
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --bg-light: #F9FAFB;
+            --border: #E5E7EB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            background: white;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover { color: var(--accent) !important; }
+
+        .btn-cta {
+            background: var(--accent);
+            color: var(--primary) !important;
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-weight: 600;
+            border: none;
+        }
+
+        .btn-cta:hover {
+            background: white;
+            box-shadow: 0 8px 20px rgba(252, 211, 77, 0.3);
+        }
+
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 80px;
+        }
+
+        .footer-section a {
+            color: white;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+            color: var(--accent);
+        }
+    </style>
+
+    @yield('styles')
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">🔥 Flare Spark Global</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/investments">Investments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+                    @auth
+                        <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
+                        <li class="nav-item">
+                            <form method="POST" action="/logout" class="d-inline">
+                                @csrf
+                                <button type="submit" class="nav-link btn btn-link" style="border:none; cursor:pointer;">Logout</button>
+                            </form>
+                        </li>
+                    @else
+                        <li class="nav-item"><a class="nav-link btn-cta ms-2" href="/login">Login</a></li>
+                    @endauth
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+            {{ $message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+    @if ($message = Session::get('error'))
+        <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+            {{ $message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+    @yield('content')
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 footer-section">
+                    <h5 style="color: var(--accent);">About</h5>
+                    <a href="/about">About Us</a>
+                    <a href="/contact">Contact</a>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5 style="color: var(--accent);">Investments</h5>
+                    <a href="/investments">Investment Plans</a>
+                    <a href="/dashboard">My Portfolio</a>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5 style="color: var(--accent);">Legal</h5>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+                <div class="col-md-3 footer-section">
+                    <h5 style="color: var(--accent);">Support</h5>
+                    <a href="/contact">Get Help</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; opacity: 0.8; margin-top: 30px;">
+                <p>&copy; 2026 Flare Spark Global. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    @yield('scripts')
+</body>
+</html>
