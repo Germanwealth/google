@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%);">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); box-shadow: 0 8px 32px rgba(0,0,0,0.15);">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('dashboard') }}">🔥 Flare Spark Global</a>
+        <a class="navbar-brand" href="{{ route('dashboard') }}" style="font-size: 1.4rem; font-weight: 800; letter-spacing: -0.5px;">💎 PRISM</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>

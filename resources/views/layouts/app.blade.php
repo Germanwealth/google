@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Flare Spark Global - Premium Financial Management Platform">
-    <title>@yield('title', 'Flare Spark Global - Dashboard')</title>
+    <meta name="description" content="PRISM - Advanced Crypto Asset Management Platform">
+    <title>@yield('title', 'PRISM - Dashboard')</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -12,13 +12,13 @@
     
     <style>
         :root {
-            --primary: #7C3AED;
-            --secondary: #A78BFA;
-            --accent: #FCD34D;
-            --text-dark: #1F2937;
-            --text-light: #6B7280;
-            --bg-light: #F9FAFB;
-            --border: #E5E7EB;
+            --primary: #3B82F6;
+            --secondary: #1E293B;
+            --accent: #06B6D4;
+            --text-dark: #0F172A;
+            --text-light: #475569;
+            --bg-light: #F8FAFC;
+            --border: #E2E8F0;
         }
 
         * {
@@ -118,7 +118,7 @@
                 </div>
             </div>
             <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; opacity: 0.8; margin-top: 30px;">
-                <p>&copy; 2026 Flare Spark Global. All rights reserved.</p>
+                <p>&copy; 2026 PRISM. All rights reserved.</p>
             </div>
         </div>
     </footer>
