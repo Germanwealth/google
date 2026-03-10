@@ -1,0 +1,57 @@
+# Git and version control
+.git/
+.gitignore
+.gitattributes
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# Dependencies
+vendor/
+node_modules/
+package-lock.json
+
+# Environment files (don't copy local .env)
+.env
+.env.*.local
+.env.backup
+
+# Testing
+tests/
+phpunit.xml
+
+# Build and cache
+bootstrap/cache/
+storage/logs/
+storage/app/
+.phpunit.result.cache
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Documentation
+docs/
+README.md
+
+# Node build (if used)
+resources/css/
+resources/js/
+public/build/
+
+# Docker files (keep docker/ folder, exclude compose and docs)
+docker-compose.yml
+docker-compose.*.yml
+
+# Other
+*.md
+LICENSE
+.editorconfig
+.styleci.yml

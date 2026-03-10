@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Flare Spark Global - Premium Financial Management Platform">
-    <title>@yield('title', 'Flare Spark Global')</title>
+    <title>@yield('title', 'Flare Spark Global - Dashboard')</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -27,8 +27,6 @@
             box-sizing: border-box;
         }
 
-        html { scroll-behavior: smooth; }
-
         body {
             font-family: 'Poppins', sans-serif;
             color: var(--text-dark);
@@ -37,7 +35,6 @@
         }
 
         .navbar {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
@@ -53,20 +50,6 @@
         }
 
         .nav-link:hover { color: var(--accent) !important; }
-
-        .btn-cta {
-            background: var(--accent);
-            color: var(--primary) !important;
-            border-radius: 50px;
-            padding: 10px 25px;
-            font-weight: 600;
-            border: none;
-        }
-
-        .btn-cta:hover {
-            background: white;
-            box-shadow: 0 8px 20px rgba(252, 211, 77, 0.3);
-        }
 
         footer {
             background: var(--primary);
@@ -90,33 +73,7 @@
     @yield('styles')
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="/">🔥 Flare Spark Global</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/investments">Investments</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
-                    @auth
-                        <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
-                        <li class="nav-item">
-                            <form method="POST" action="/logout" class="d-inline">
-                                @csrf
-                                <button type="submit" class="nav-link btn btn-link" style="border:none; cursor:pointer;">Logout</button>
-                            </form>
-                        </li>
-                    @else
-                        <li class="nav-item"><a class="nav-link btn-cta ms-2" href="/login">Login</a></li>
-                    @endauth
-                </ul>
-            </div>
-        </div>
-    </nav>
+    @include('layouts.navigation')
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
@@ -132,7 +89,9 @@
         </div>
     @endif
 
-    @yield('content')
+    <main>
+        @yield('content')
+    </main>
 
     <footer>
         <div class="container">

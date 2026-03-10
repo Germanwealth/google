@@ -1,5 +1,22 @@
 [build]
-builder = "nixpacks"
+builder = "dockerfile"
+buildCommand = "docker build -t flarespark:latest ."
+
+[env]
+APP_NAME = "FlareSpark"
+APP_ENV = "production"
+APP_DEBUG = "false"
+LOG_CHANNEL = "stack"
+LOG_LEVEL = "info"
+CACHE_DRIVER = "file"
+QUEUE_CONNECTION = "sync"
+SESSION_DRIVER = "file"
+SESSION_LIFETIME = "120"
+VITE_APP_NAME = "FlareSpark"
 
 [deploy]
-startCommand = "php artisan serve --host=0.0.0.0 --port=$PORT"
+startCommand = "supervisord -c /etc/supervisord.conf"
+healthcheckPath = "/health"
+healthcheckInterval = "10s"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
