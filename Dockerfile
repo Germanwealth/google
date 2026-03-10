@@ -25,7 +25,6 @@ RUN docker-php-ext-configure gd --with-jpeg --with-webp \
     curl \
     dom \
     fileinfo \
-    json \
     mbstring \
     tokenizer \
     xml
