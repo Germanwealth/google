@@ -155,7 +155,62 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <img src="https://via.placeholder.com/520x420?text=Crypto+Analytics" class="img-fluid rounded-3" alt="Advanced Analytics" style="box-shadow: 0 20px 60px rgba(0,0,0,0.2);">
+                <svg class="img-fluid rounded-3" viewBox="0 0 520 420" style="box-shadow: 0 20px 60px rgba(0,0,0,0.2); background: linear-gradient(135deg, #1E293B 0%, #334155 100%); border-radius: 12px;" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Grid background -->
+                    <defs>
+                        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(59, 130, 246, 0.1)" stroke-width="1"/>
+                        </pattern>
+                    </defs>
+                    <rect width="520" height="420" fill="url(#grid)" />
+                    
+                    <!-- Analytics Chart -->
+                    <g transform="translate(50, 50)">
+                        <!-- Chart title -->
+                        <text x="0" y="20" font-size="20" font-weight="bold" fill="#F8FAFC">Portfolio Performance</text>
+                        
+                        <!-- Chart line -->
+                        <polyline points="0,150 30,130 60,110 90,125 120,85 150,95 180,60 210,70 220,50" 
+                                  fill="none" stroke="#3B82F6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        
+                        <!-- Chart area gradient -->
+                        <defs>
+                            <linearGradient id="chartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:0.3" />
+                                <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:0" />
+                            </linearGradient>
+                        </defs>
+                        <polygon points="0,150 30,130 60,110 90,125 120,85 150,95 180,60 210,70 220,50 220,200 0,200" 
+                                 fill="url(#chartGrad)" />
+                        
+                        <!-- Y-axis labels -->
+                        <text x="-30" y="155" font-size="12" fill="#94A3B8">$0</text>
+                        <text x="-30" y="85" font-size="12" fill="#94A3B8">$50K</text>
+                        <text x="-30" y="15" font-size="12" fill="#94A3B8">$100K</text>
+                        
+                        <!-- X-axis -->
+                        <line x1="0" y1="200" x2="220" y2="200" stroke="#475569" stroke-width="1" />
+                        
+                        <!-- Data points -->
+                        <circle cx="0" cy="150" r="4" fill="#3B82F6" />
+                        <circle cx="30" cy="130" r="4" fill="#3B82F6" />
+                        <circle cx="60" cy="110" r="4" fill="#3B82F6" />
+                        <circle cx="220" cy="50" r="4" fill="#10B981" />
+                    </g>
+                    
+                    <!-- Stats boxes -->
+                    <g transform="translate(50, 280)">
+                        <rect x="0" y="0" width="100" height="80" rx="8" fill="rgba(59, 130, 246, 0.1)" stroke="#3B82F6" stroke-width="1"/>
+                        <text x="10" y="20" font-size="12" fill="#94A3B8">Total Assets</text>
+                        <text x="10" y="45" font-size="18" font-weight="bold" fill="#F8FAFC">$1.2M</text>
+                        <text x="10" y="65" font-size="11" fill="#10B981">+12.5% 24h</text>
+                        
+                        <rect x="130" y="0" width="100" height="80" rx="8" fill="rgba(16, 185, 129, 0.1)" stroke="#10B981" stroke-width="1"/>
+                        <text x="140" y="20" font-size="12" fill="#94A3B8">Daily Gain</text>
+                        <text x="140" y="45" font-size="18" font-weight="bold" fill="#F8FAFC">$8,420</text>
+                        <text x="140" y="65" font-size="11" fill="#10B981">+2.3% Today</text>
+                    </g>
+                </svg>
             </div>
         </div>
     </div>
@@ -165,7 +220,53 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 mb-4 mb-lg-0">
-                <img src="https://via.placeholder.com/520x420?text=Portfolio+Management" class="img-fluid rounded-3" alt="Portfolio Management">
+                <svg class="img-fluid rounded-3" viewBox="0 0 520 420" style="background: linear-gradient(135deg, #1E293B 0%, #334155 100%); border-radius: 12px;" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background grid -->
+                    <defs>
+                        <pattern id="grid2" width="40" height="40" patternUnits="userSpaceOnUse">
+                            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(168, 85, 247, 0.1)" stroke-width="1"/>
+                        </pattern>
+                    </defs>
+                    <rect width="520" height="420" fill="url(#grid2)" />
+                    
+                    <!-- Wallet illustration -->
+                    <g transform="translate(160, 80)">
+                        <!-- Wallet main body -->
+                        <rect x="0" y="40" width="200" height="120" rx="12" fill="none" stroke="#A855F7" stroke-width="2"/>
+                        
+                        <!-- Wallet flap -->
+                        <path d="M 0 40 Q 100 0 200 40" fill="none" stroke="#A855F7" stroke-width="2"/>
+                        
+                        <!-- Coins visualization -->
+                        <circle cx="50" cy="100" r="28" fill="rgba(251, 191, 36, 0.2)" stroke="#FBbF24" stroke-width="2"/>
+                        <circle cx="50" cy="100" r="20" fill="none" stroke="#FBbF24" stroke-width="1"/>
+                        <text x="50" y="105" font-size="16" font-weight="bold" fill="#FBbF24" text-anchor="middle">B</text>
+                        
+                        <circle cx="130" cy="85" r="28" fill="rgba(59, 130, 246, 0.2)" stroke="#3B82F6" stroke-width="2"/>
+                        <circle cx="130" cy="85" r="20" fill="none" stroke="#3B82F6" stroke-width="1"/>
+                        <text x="130" y="90" font-size="16" font-weight="bold" fill="#3B82F6" text-anchor="middle">E</text>
+                        
+                        <circle cx="100" cy="130" r="28" fill="rgba(34, 197, 94, 0.2)" stroke="#22C55E" stroke-width="2"/>
+                        <circle cx="100" cy="130" r="20" fill="none" stroke="#22C55E" stroke-width="1"/>
+                        <text x="100" y="135" font-size="16" font-weight="bold" fill="#22C55E" text-anchor="middle">$</text>
+                    </g>
+                    
+                    <!-- Features list -->
+                    <g transform="translate(50, 260)">
+                        <g>
+                            <circle cx="10" cy="10" r="5" fill="#3B82F6" />
+                            <text x="25" y="14" font-size="14" fill="#F8FAFC">Multi-Chain Support</text>
+                        </g>
+                        <g transform="translate(0, 35)">
+                            <circle cx="10" cy="10" r="5" fill="#10B981" />
+                            <text x="25" y="14" font-size="14" fill="#F8FAFC">Real-Time Analytics</text>
+                        </g>
+                        <g transform="translate(0, 70)">
+                            <circle cx="10" cy="10" r="5" fill="#A855F7" />
+                            <text x="25" y="14" font-size="14" fill="#F8FAFC">Advanced Security</text>
+                        </g>
+                    </g>
+                </svg>
             </div>
             <div class="col-lg-6 ps-lg-4">
                 <h2>Why Choose PRISM?</h2>
@@ -173,6 +274,156 @@
                 <p>With multi-chain support, advanced security features, and a user-friendly interface, PRISM is built for both beginners and seasoned crypto professionals.</p>
                 <p>Experience seamless wallet integration, automated portfolio tracking, and intelligent market insights all in one place.</p>
                 <a href="#transactions" class="btn btn-primary" style="background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%); border: none; padding: 13px 38px; border-radius: 8px; font-weight: 600;">Learn More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section style="background: white; padding: 100px 0; border-top: 1px solid #E2E8F0;">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <h2 style="font-size: 2.5rem; font-weight: 800; color: #0F172A; margin-bottom: 20px;">Why PRISM Stands Out</h2>
+                <p style="font-size: 1.1rem; color: #475569;">Enterprise-grade features designed for modern investors</p>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Security Feature -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); border: 1px solid #E2E8F0; transition: all 0.3s ease; height: 100%;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 40px rgba(0, 0, 0, 0.12)'; this.style.borderColor='#3B82F6';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.08)'; this.style.borderColor='#E2E8F0';">
+                    <div style="width: 60px; height: 60px; margin-bottom: 20px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" style="width: 100%; height: 100%; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));">
+                            <defs>
+                                <linearGradient id="secGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#10B981;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <rect x="12" y="16" width="40" height="48" rx="4" fill="url(#secGrad1)"/>
+                            <path d="M32 16V8l-16 6v12c0 12 16 16 16 16s16-4 16-16V14l-16-6v8z" fill="white" opacity="0.9"/>
+                        </svg>
+                    </div>
+                    <div style="width: 4px; height: 40px; background: linear-gradient(135deg, #3B82F6, #A855F7); border-radius: 2px; margin-bottom: 15px;"></div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: #0F172A; margin-bottom: 12px;">Bank-Level Security</h3>
+                    <p style="color: #6B7280; line-height: 1.6; font-size: 0.95rem;">Military-grade encryption and multi-signature wallets protect your assets with enterprise-level security protocols.</p>
+                </div>
+            </div>
+
+            <!-- Analytics Feature -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); border: 1px solid #E2E8F0; transition: all 0.3s ease; height: 100%;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 40px rgba(0, 0, 0, 0.12)'; this.style.borderColor='#3B82F6';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.08)'; this.style.borderColor='#E2E8F0';">
+                    <div style="width: 60px; height: 60px; margin-bottom: 20px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" style="width: 100%; height: 100%; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));">
+                            <defs>
+                                <linearGradient id="analyticGrad1" x1="0%" y1="100%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#06B6D4;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <rect x="10" y="42" width="8" height="16" rx="2" fill="url(#analyticGrad1)"/>
+                            <rect x="24" y="28" width="8" height="30" rx="2" fill="url(#analyticGrad1)"/>
+                            <rect x="38" y="10" width="8" height="48" rx="2" fill="url(#analyticGrad1)"/>
+                            <rect x="52" y="18" width="8" height="40" rx="2" fill="url(#analyticGrad1)"/>
+                            <line x1="8" y1="58" x2="56" y2="58" stroke="url(#analyticGrad1)" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div style="width: 4px; height: 40px; background: linear-gradient(135deg, #3B82F6, #A855F7); border-radius: 2px; margin-bottom: 15px;"></div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: #0F172A; margin-bottom: 12px;">Advanced Analytics</h3>
+                    <p style="color: #6B7280; line-height: 1.6; font-size: 0.95rem;">Real-time insights and predictive analysis powered by AI to optimize your portfolio performance.</p>
+                </div>
+            </div>
+
+            <!-- Speed Feature -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); border: 1px solid #E2E8F0; transition: all 0.3s ease; height: 100%;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 40px rgba(0, 0, 0, 0.12)'; this.style.borderColor='#3B82F6';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.08)'; this.style.borderColor='#E2E8F0';">
+                    <div style="width: 60px; height: 60px; margin-bottom: 20px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" style="width: 100%; height: 100%; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));">
+                            <defs>
+                                <linearGradient id="speedGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#D97706;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="32" cy="32" r="26" fill="none" stroke="url(#speedGrad1)" stroke-width="3"/>
+                            <circle cx="32" cy="32" r="20" fill="none" stroke="url(#speedGrad1)" stroke-width="2" opacity="0.6"/>
+                            <line x1="32" y1="32" x2="32" y2="10" stroke="url(#speedGrad1)" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="32" cy="32" r="4" fill="url(#speedGrad1)"/>
+                        </svg>
+                    </div>
+                    <div style="width: 4px; height: 40px; background: linear-gradient(135deg, #3B82F6, #A855F7); border-radius: 2px; margin-bottom: 15px;"></div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: #0F172A; margin-bottom: 12px;">Lightning Fast</h3>
+                    <p style="color: #6B7280; line-height: 1.6; font-size: 0.95rem;">Transactions execute in milliseconds with optimized blockchain infrastructure for seamless trading.</p>
+                </div>
+            </div>
+
+            <!-- Multi-Chain Feature -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); border: 1px solid #E2E8F0; transition: all 0.3s ease; height: 100%;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 40px rgba(0, 0, 0, 0.12)'; this.style.borderColor='#3B82F6';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.08)'; this.style.borderColor='#E2E8F0';">
+                    <div style="width: 60px; height: 60px; margin-bottom: 20px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" style="width: 100%; height: 100%; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));">
+                            <defs>
+                                <linearGradient id="chainGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#A855F7;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="16" cy="32" r="10" fill="url(#chainGrad1)"/>
+                            <circle cx="32" cy="32" r="10" fill="url(#chainGrad1)"/>
+                            <circle cx="48" cy="32" r="10" fill="url(#chainGrad1)"/>
+                            <line x1="26" y1="32" x2="38" y2="32" stroke="white" stroke-width="2"/>
+                            <line x1="42" y1="32" x2="54" y2="32" stroke="white" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div style="width: 4px; height: 40px; background: linear-gradient(135deg, #3B82F6, #A855F7); border-radius: 2px; margin-bottom: 15px;"></div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: #0F172A; margin-bottom: 12px;">Multi-Chain Support</h3>
+                    <p style="color: #6B7280; line-height: 1.6; font-size: 0.95rem;">Seamlessly manage assets across Ethereum, Polygon, Solana, and 10+ major blockchain networks.</p>
+                </div>
+            </div>
+
+            <!-- Wallet Feature -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); border: 1px solid #E2E8F0; transition: all 0.3s ease; height: 100%;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 40px rgba(0, 0, 0, 0.12)'; this.style.borderColor='#3B82F6';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.08)'; this.style.borderColor='#E2E8F0';">
+                    <div style="width: 60px; height: 60px; margin-bottom: 20px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" style="width: 100%; height: 100%; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));">
+                            <defs>
+                                <linearGradient id="walletGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#EC4899;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#DB2777;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <rect x="8" y="18" width="48" height="32" rx="4" fill="url(#walletGrad1)" opacity="0.9"/>
+                            <rect x="12" y="22" width="40" height="24" rx="3" fill="white" opacity="0.15"/>
+                            <circle cx="48" cy="40" r="5" fill="white" opacity="0.7"/>
+                            <rect x="8" y="14" width="32" height="6" rx="2" fill="url(#walletGrad1)"/>
+                        </svg>
+                    </div>
+                    <div style="width: 4px; height: 40px; background: linear-gradient(135deg, #3B82F6, #A855F7); border-radius: 2px; margin-bottom: 15px;"></div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: #0F172A; margin-bottom: 12px;">Wallet Integration</h3>
+                    <p style="color: #6B7280; line-height: 1.6; font-size: 0.95rem;">Connect your favorite wallets including MetaMask, WalletConnect, and hardware wallets in seconds.</p>
+                </div>
+            </div>
+
+            <!-- Support Feature -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); border: 1px solid #E2E8F0; transition: all 0.3s ease; height: 100%;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 15px 40px rgba(0, 0, 0, 0.12)'; this.style.borderColor='#3B82F6';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.08)'; this.style.borderColor='#E2E8F0';">
+                    <div style="width: 60px; height: 60px; margin-bottom: 20px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" style="width: 100%; height: 100%; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));">
+                            <defs>
+                                <linearGradient id="supportGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#06B6D4;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#0891B2;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="32" cy="28" r="14" fill="url(#supportGrad1)" opacity="0.2"/>
+                            <path d="M20 32h4m-4-8h8m-8 16h8" stroke="url(#supportGrad1)" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="44" cy="40" r="12" fill="url(#supportGrad1)"/>
+                            <path d="M40 40h8M44 36v8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div style="width: 4px; height: 40px; background: linear-gradient(135deg, #3B82F6, #A855F7); border-radius: 2px; margin-bottom: 15px;"></div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: #0F172A; margin-bottom: 12px;">24/7 Support</h3>
+                    <p style="color: #6B7280; line-height: 1.6; font-size: 0.95rem;">Expert support team available around the clock to help with any questions or technical issues.</p>
+                </div>
             </div>
         </div>
     </div>

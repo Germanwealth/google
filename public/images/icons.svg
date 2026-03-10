@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <!-- Security Icon -->
+  <symbol id="icon-security" viewBox="0 0 64 64">
+    <defs>
+      <linearGradient id="securityGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#10B981;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+    <rect x="12" y="16" width="40" height="48" rx="4" fill="url(#securityGrad)"/>
+    <path d="M32 16V8l-16 6v12c0 12 16 16 16 16s16-4 16-16V14l-16-6v8z" fill="white" opacity="0.9"/>
+    <circle cx="32" cy="36" r="3" fill="white"/>
+  </symbol>
+
+  <!-- Analytics Icon -->
+  <symbol id="icon-analytics" viewBox="0 0 64 64">
+    <defs>
+      <linearGradient id="analyticsGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#06B6D4;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+    <rect x="10" y="42" width="8" height="16" rx="2" fill="url(#analyticsGrad)"/>
+    <rect x="24" y="28" width="8" height="30" rx="2" fill="url(#analyticsGrad)"/>
+    <rect x="38" y="10" width="8" height="48" rx="2" fill="url(#analyticsGrad)"/>
+    <rect x="52" y="18" width="8" height="40" rx="2" fill="url(#analyticsGrad)"/>
+    <line x1="8" y1="58" x2="56" y2="58" stroke="url(#analyticsGrad)" stroke-width="2"/>
+  </symbol>
+
+  <!-- Speed Icon -->
+  <symbol id="icon-speed" viewBox="0 0 64 64">
+    <defs>
+      <linearGradient id="speedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#D97706;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+    <circle cx="32" cy="32" r="26" fill="none" stroke="url(#speedGrad)" stroke-width="3"/>
+    <circle cx="32" cy="32" r="20" fill="none" stroke="url(#speedGrad)" stroke-width="2" opacity="0.6"/>
+    <line x1="32" y1="32" x2="32" y2="10" stroke="url(#speedGrad)" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="32" cy="32" r="4" fill="url(#speedGrad)"/>
+  </symbol>
+
+  <!-- Multi-Chain Icon -->
+  <symbol id="icon-multichain" viewBox="0 0 64 64">
+    <defs>
+      <linearGradient id="chainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#A855F7;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+    <circle cx="16" cy="32" r="10" fill="url(#chainGrad)"/>
+    <circle cx="32" cy="32" r="10" fill="url(#chainGrad)"/>
+    <circle cx="48" cy="32" r="10" fill="url(#chainGrad)"/>
+    <line x1="26" y1="32" x2="38" y2="32" stroke="white" stroke-width="2"/>
+    <line x1="42" y1="32" x2="54" y2="32" stroke="white" stroke-width="2"/>
+  </symbol>
+
+  <!-- Wallet Icon -->
+  <symbol id="icon-wallet" viewBox="0 0 64 64">
+    <defs>
+      <linearGradient id="walletGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#EC4899;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#DB2777;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+    <rect x="8" y="18" width="48" height="32" rx="4" fill="url(#walletGrad)" opacity="0.9"/>
+    <rect x="12" y="22" width="40" height="24" rx="3" fill="white" opacity="0.15"/>
+    <circle cx="48" cy="40" r="5" fill="white" opacity="0.7"/>
+    <rect x="8" y="14" width="32" height="6" rx="2" fill="url(#walletGrad)"/>
+  </symbol>
+</svg>
