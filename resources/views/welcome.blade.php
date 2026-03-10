@@ -70,8 +70,8 @@
       animation: float 6s ease-in-out infinite;
     }
 
-    .hero-content { 
-      position: relative; 
+    .hero-content {
+      position: relative;
       z-index: 1;
       width: 100%;
       animation: fadeInUp 0.8s ease-out;
@@ -180,11 +180,11 @@
       .hero {
         padding: 106px 40px 86px;
       }
-      
+
       .hero h1 {
         font-size: 2.95rem;
       }
-      
+
       .hero p {
         font-size: 1.08rem;
       }
@@ -195,11 +195,11 @@
       .hero {
         padding: 146px 0 110px;
       }
-      
+
       .hero h1 {
         font-size: 3.65rem;
       }
-      
+
       .hero p {
         font-size: 1.12rem;
         max-width: 560px;
@@ -257,12 +257,12 @@
         width: auto;
         margin-bottom: 0;
       }
-      
+
       .btn-primary-hero {
         margin-right: 12px;
         padding: 16px 30px;
       }
-      
+
       .btn-secondary-hero {
         padding: 15px 28px;
       }
@@ -370,12 +370,12 @@
       .basic-1 {
         padding: 60px 40px;
       }
-      
+
       .basic-1 h2 {
         font-size: 2.2rem;
         text-align: left;
       }
-      
+
       .basic-1 p {
         font-size: 1.02rem;
       }
@@ -386,11 +386,11 @@
       .basic-1 {
         padding: 100px 0;
       }
-      
+
       .basic-1 h2 {
         font-size: 2.8rem;
       }
-      
+
       .basic-1 p {
         font-size: 1.05rem;
       }
@@ -517,22 +517,22 @@
       .transactions-section {
         padding: 60px 40px;
       }
-      
+
       .table {
         font-size: 0.95rem;
       }
-      
+
       .table th,
       .table td {
         padding: 12px 12px;
         font-size: 0.95rem;
       }
-      
+
       .card-header {
         padding: 15px 20px !important;
         font-size: 1rem;
       }
-      
+
       .badge {
         font-size: 0.8rem;
       }
@@ -543,17 +543,17 @@
       .transactions-section {
         padding: 80px 0;
       }
-      
+
       .table {
         font-size: 1rem;
       }
-      
+
       .table th,
       .table td {
         padding: 14px 16px;
         font-size: 1rem;
       }
-      
+
       .badge {
         font-size: 0.85rem;
       }
@@ -814,7 +814,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="analytics-diagram">
-                    <img src="{{ asset('static/images/flare2.png') }}" alt="Trading dashboard preview">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80" alt="Trading dashboard preview">
                     <div class="hero-visual-label">
                         <strong>Portfolio Command Center</strong>
                         Real-time signals and risk controls in one unified view.
@@ -837,29 +837,29 @@
                         </pattern>
                     </defs>
                     <rect width="520" height="420" fill="url(#grid2)" />
-                    
+
                     <!-- Wallet illustration -->
                     <g transform="translate(160, 80)">
                         <!-- Wallet main body -->
                         <rect x="0" y="40" width="200" height="120" rx="12" fill="none" stroke="#A855F7" stroke-width="2"/>
-                        
+
                         <!-- Wallet flap -->
                         <path d="M 0 40 Q 100 0 200 40" fill="none" stroke="#A855F7" stroke-width="2"/>
-                        
+
                         <!-- Coins visualization -->
                         <circle cx="50" cy="100" r="28" fill="rgba(251, 191, 36, 0.2)" stroke="#FBbF24" stroke-width="2"/>
                         <circle cx="50" cy="100" r="20" fill="none" stroke="#FBbF24" stroke-width="1"/>
                         <text x="50" y="105" font-size="16" font-weight="bold" fill="#FBbF24" text-anchor="middle">B</text>
-                        
+
                         <circle cx="130" cy="85" r="28" fill="rgba(59, 130, 246, 0.2)" stroke="#3B82F6" stroke-width="2"/>
                         <circle cx="130" cy="85" r="20" fill="none" stroke="#3B82F6" stroke-width="1"/>
                         <text x="130" y="90" font-size="16" font-weight="bold" fill="#3B82F6" text-anchor="middle">E</text>
-                        
+
                         <circle cx="100" cy="130" r="28" fill="rgba(34, 197, 94, 0.2)" stroke="#22C55E" stroke-width="2"/>
                         <circle cx="100" cy="130" r="20" fill="none" stroke="#22C55E" stroke-width="1"/>
                         <text x="100" y="135" font-size="16" font-weight="bold" fill="#22C55E" text-anchor="middle">$</text>
                     </g>
-                    
+
                     <!-- Features list -->
                     <g transform="translate(50, 260)">
                         <g>
@@ -1123,10 +1123,7 @@
     tableBody.prepend(row);
   }
 
-  // Generate a row every 5 seconds
-  setInterval(generateRow, 5000);
-
-  // Generate some initial rows
-  for (let i = 0; i < 4; i++) generateRow();
+  // Generate fixed initial rows (no auto-scrolling/auto-refresh behavior)
+  for (let i = 0; i < 6; i++) generateRow();
 </script>
 @endsection
