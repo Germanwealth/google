@@ -4,13 +4,17 @@
 
 @section('styles')
 <style>
+    /* MOBILE FIRST - Default for small screens */
     .hero {
       background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%);
       color: white;
-      padding: 140px 0 100px;
+      padding: 60px 20px 50px;
       position: relative;
       overflow: hidden;
       margin-top: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
     }
 
     .hero::before {
@@ -24,10 +28,14 @@
                   radial-gradient(circle at 20% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 40%);
     }
 
-    .hero-content { position: relative; z-index: 1; }
+    .hero-content { 
+      position: relative; 
+      z-index: 1;
+      width: 100%;
+    }
 
     .hero h1 {
-      font-size: 3.5rem;
+      font-size: 2rem;
       font-weight: 800;
       margin-bottom: 20px;
       line-height: 1.2;
@@ -38,11 +46,41 @@
     }
 
     .hero p {
-      font-size: 1.15rem;
-      margin-bottom: 35px;
+      font-size: 0.95rem;
+      margin-bottom: 30px;
       opacity: 0.9;
       line-height: 1.8;
       color: #CBD5E1;
+    }
+
+    /* Tablet and larger screens */
+    @media (min-width: 768px) {
+      .hero {
+        padding: 100px 40px 80px;
+      }
+      
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+      
+      .hero p {
+        font-size: 1.05rem;
+      }
+    }
+
+    /* Desktop screens */
+    @media (min-width: 1024px) {
+      .hero {
+        padding: 140px 0 100px;
+      }
+      
+      .hero h1 {
+        font-size: 3.5rem;
+      }
+      
+      .hero p {
+        font-size: 1.15rem;
+      }
     }
 
     .btn-primary-hero {
@@ -50,14 +88,18 @@
       color: white;
       border: none;
       border-radius: 8px;
-      padding: 16px 42px;
+      padding: 14px 28px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
       display: inline-block;
-      margin-right: 15px;
+      margin-right: 0;
+      margin-bottom: 12px;
       text-decoration: none;
       box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+      font-size: 0.95rem;
+      width: 100%;
+      text-align: center;
     }
 
     .btn-primary-hero:hover {
@@ -72,12 +114,33 @@
       color: #E2E8F0;
       border: 2px solid #475569;
       border-radius: 8px;
-      padding: 14px 40px;
+      padding: 12px 26px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
       display: inline-block;
       text-decoration: none;
+      font-size: 0.95rem;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Tablet and larger */
+    @media (min-width: 768px) {
+      .btn-primary-hero,
+      .btn-secondary-hero {
+        width: auto;
+        margin-bottom: 0;
+      }
+      
+      .btn-primary-hero {
+        margin-right: 15px;
+        padding: 16px 42px;
+      }
+      
+      .btn-secondary-hero {
+        padding: 14px 40px;
+      }
     }
 
     .btn-secondary-hero:hover {
@@ -86,33 +149,74 @@
       border-color: #CBD5E1;
     }
 
+    /* FEATURES/BASIC SECTION - MOBILE FIRST */
     .basic-1 {
-      padding: 100px 0;
+      padding: 40px 20px;
       background: #F8FAFC;
     }
 
     .basic-1 h2 {
-      font-size: 2.8rem;
+      font-size: 1.75rem;
       font-weight: 800;
       margin-bottom: 25px;
       color: #0F172A;
+      text-align: center;
     }
 
     .basic-1 p {
-      font-size: 1.05rem;
+      font-size: 0.95rem;
       color: #475569;
       line-height: 1.9;
       margin-bottom: 20px;
     }
 
+    /* Tablet screens */
+    @media (min-width: 768px) {
+      .basic-1 {
+        padding: 60px 40px;
+      }
+      
+      .basic-1 h2 {
+        font-size: 2.2rem;
+        text-align: left;
+      }
+      
+      .basic-1 p {
+        font-size: 1.02rem;
+      }
+    }
+
+    /* Desktop screens */
+    @media (min-width: 1024px) {
+      .basic-1 {
+        padding: 100px 0;
+      }
+      
+      .basic-1 h2 {
+        font-size: 2.8rem;
+      }
+      
+      .basic-1 p {
+        font-size: 1.05rem;
+      }
+    }
+
+    /* TRANSACTIONS SECTION - MOBILE FIRST */
     .transactions-section {
       background: white;
-      padding: 80px 0;
+      padding: 40px 20px;
     }
 
     .card-header {
       background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%) !important;
       color: white !important;
+      padding: 12px 16px !important;
+      font-size: 0.95rem;
+    }
+
+    .table {
+      font-size: 0.85rem;
+      margin-bottom: 0;
     }
 
     .table th {
@@ -120,19 +224,203 @@
       font-weight: 700;
       color: #0F172A;
       border-bottom: 2px solid #E2E8F0;
+      padding: 10px 8px;
+      font-size: 0.85rem;
     }
 
     .table td {
       vertical-align: middle;
       border-color: #E2E8F0;
       color: #334155;
+      padding: 10px 8px;
     }
 
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 2.2rem; }
-      .hero { padding: 80px 0 60px; }
-      .btn-primary-hero { margin-bottom: 15px; }
+    .badge {
+      font-size: 0.75rem;
+      padding: 4px 8px;
     }
+
+    /* Tablet screens */
+    @media (min-width: 768px) {
+      .transactions-section {
+        padding: 60px 40px;
+      }
+      
+      .table {
+        font-size: 0.95rem;
+      }
+      
+      .table th,
+      .table td {
+        padding: 12px 12px;
+        font-size: 0.95rem;
+      }
+      
+      .card-header {
+        padding: 15px 20px !important;
+        font-size: 1rem;
+      }
+      
+      .badge {
+        font-size: 0.8rem;
+      }
+    }
+
+    /* Desktop screens */
+    @media (min-width: 1024px) {
+      .transactions-section {
+        padding: 80px 0;
+      }
+      
+      .table {
+        font-size: 1rem;
+      }
+      
+      .table th,
+      .table td {
+        padding: 14px 16px;
+        font-size: 1rem;
+      }
+      
+      .badge {
+        font-size: 0.85rem;
+      }
+    }
+
+    /* GENERAL RESPONSIVE UTILITIES */
+    .container-responsive {
+      width: 100%;
+      padding: 0 20px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .container-responsive {
+        padding: 0 40px;
+        max-width: 1200px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .container-responsive {
+        padding: 0 60px;
+      }
+    }
+
+    /* Touch-friendly touch targets (48px minimum for mobile) */
+    button, a.btn, .btn {
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    @media (min-width: 768px) {
+      button, a.btn, .btn {
+        min-height: 40px;
+        min-width: 40px;
+      }
+    }
+
+    /* RESPONSIVE IMAGE HANDLING */
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Prevent horizontal scrolling on mobile */
+    .hero, .basic-1, .transactions-section {
+      overflow-x: hidden;
+    }
+
+    /* SPACING RESPONSIVE UTILITIES */
+    .pt-responsive {
+      padding-top: 30px;
+    }
+
+    .pb-responsive {
+      padding-bottom: 30px;
+    }
+
+    .px-responsive {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .pt-responsive {
+        padding-top: 50px;
+      }
+
+      .pb-responsive {
+        padding-bottom: 50px;
+      }
+
+      .px-responsive {
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .pt-responsive {
+        padding-top: 70px;
+      }
+
+      .pb-responsive {
+        padding-bottom: 70px;
+      }
+
+      .px-responsive {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
+    /* TYPOGRAPHY MOBILE-FIRST */
+    h1 { line-height: 1.2; }
+    h2 { line-height: 1.3; }
+    h3 { line-height: 1.4; }
+    p { line-height: 1.6; word-break: break-word; }
+
+    /* GRID RESPONSIVE */
+    .row {
+      margin-right: -10px;
+      margin-left: -10px;
+    }
+
+    [class*='col-'] {
+      padding-right: 10px;
+      padding-left: 10px;
+      margin-bottom: 20px;
+    }
+
+    @media (min-width: 768px) {
+      [class*='col-'] {
+        margin-bottom: 0;
+      }
+    }
+
+    /* Prevent text selection on interactive elements */
+    button, a, .btn {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* HIGH DPI SCREENS */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    }
+
 </style>
 @endsection
 
