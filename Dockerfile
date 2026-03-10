@@ -10,7 +10,7 @@ RUN apk add --no-cache \
     libwebp-dev \
     zlib-dev \
     libxml2-dev \
-    curl \
+    curl-dev \
     git \
     supervisor
 
