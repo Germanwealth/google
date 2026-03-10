@@ -36,6 +36,7 @@ COPY composer.json composer.lock* ./
 # Install PHP dependencies (optimize for production)
 RUN composer install \
     --no-dev \
+    --no-scripts \
     --no-interaction \
     --no-progress \
     --prefer-dist \
