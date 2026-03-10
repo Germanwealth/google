@@ -47,13 +47,13 @@
 
     /* MOBILE FIRST - Default for small screens */
     .hero {
-      background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%);
+      background: linear-gradient(120deg, #0F172A 0%, #111827 45%, #1E293B 100%);
       color: white;
-      padding: 60px 20px 50px;
+      padding: 64px 20px 56px;
       position: relative;
       overflow: hidden;
       margin-top: 0;
-      min-height: 100vh;
+      min-height: 92vh;
       display: flex;
       align-items: center;
     }
@@ -65,8 +65,8 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 40%),
-                  radial-gradient(circle at 20% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 40%);
+      background: radial-gradient(circle at 86% 18%, rgba(59, 130, 246, 0.18) 0%, transparent 38%),
+                  radial-gradient(circle at 14% 82%, rgba(16, 185, 129, 0.14) 0%, transparent 42%);
       animation: float 6s ease-in-out infinite;
     }
 
@@ -130,53 +130,79 @@
     }
 
     .hero h1 {
-      font-size: 2rem;
+      font-size: 2.05rem;
       font-weight: 800;
-      margin-bottom: 20px;
-      line-height: 1.2;
+      margin-bottom: 16px;
+      line-height: 1.12;
       background: linear-gradient(135deg, #F8FAFC 0%, #CBD5E1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
     }
 
     .hero p {
-      font-size: 0.95rem;
-      margin-bottom: 30px;
-      opacity: 0.9;
-      line-height: 1.8;
-      color: #CBD5E1;
+      font-size: 1rem;
+      margin-bottom: 26px;
+      opacity: 0.94;
+      line-height: 1.75;
+      color: #D1D5DB;
       animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+      background: rgba(37, 99, 235, 0.18);
+      border: 1px solid rgba(96, 165, 250, 0.4);
+      color: #BFDBFE;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22C55E;
+      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.2);
     }
 
     /* Tablet and larger screens */
     @media (min-width: 768px) {
       .hero {
-        padding: 100px 40px 80px;
+        padding: 106px 40px 86px;
       }
       
       .hero h1 {
-        font-size: 2.8rem;
+        font-size: 2.95rem;
       }
       
       .hero p {
-        font-size: 1.05rem;
+        font-size: 1.08rem;
       }
     }
 
     /* Desktop screens */
     @media (min-width: 1024px) {
       .hero {
-        padding: 140px 0 100px;
+        padding: 146px 0 110px;
       }
       
       .hero h1 {
-        font-size: 3.5rem;
+        font-size: 3.65rem;
       }
       
       .hero p {
-        font-size: 1.15rem;
+        font-size: 1.12rem;
+        max-width: 560px;
       }
     }
 
@@ -184,17 +210,17 @@
       background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
       color: white;
       border: none;
-      border-radius: 8px;
-      padding: 14px 28px;
-      font-weight: 600;
+      border-radius: 12px;
+      padding: 14px 24px;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.3s ease;
       display: inline-block;
       margin-right: 0;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       text-decoration: none;
       box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       width: 100%;
       text-align: center;
       animation: fadeInUp 0.8s ease-out 0.3s both;
@@ -208,17 +234,17 @@
     }
 
     .btn-secondary-hero {
-      background: transparent;
+      background: rgba(15, 23, 42, 0.55);
       color: #E2E8F0;
-      border: 2px solid #475569;
-      border-radius: 8px;
-      padding: 12px 26px;
-      font-weight: 600;
+      border: 1px solid #475569;
+      border-radius: 12px;
+      padding: 13px 24px;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.3s ease;
       display: inline-block;
       text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       width: 100%;
       text-align: center;
       animation: fadeInUp 0.8s ease-out 0.4s both;
@@ -233,20 +259,67 @@
       }
       
       .btn-primary-hero {
-        margin-right: 15px;
-        padding: 16px 42px;
+        margin-right: 12px;
+        padding: 16px 30px;
       }
       
       .btn-secondary-hero {
-        padding: 14px 40px;
+        padding: 15px 28px;
       }
     }
 
     .btn-secondary-hero:hover {
       background: #1E293B;
       color: #F8FAFC;
-      border-color: #CBD5E1;
+      border-color: #94A3B8;
       transform: translateY(-3px);
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .hero-stats li {
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid rgba(100, 116, 139, 0.45);
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .hero-stats strong {
+      display: block;
+      font-size: 1.15rem;
+      color: #F8FAFC;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .hero-stats span {
+      display: block;
+      font-size: 0.78rem;
+      color: #CBD5E1;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    @media (min-width: 768px) {
+      .hero-cta {
+        flex-direction: row;
+        align-items: center;
+      }
     }
 
     /* FEATURES/BASIC SECTION - MOBILE FIRST */
@@ -622,52 +695,68 @@
 
     /* SVG ANALYTICS DIAGRAM */
     .analytics-diagram {
-      background: linear-gradient(135deg, white 0%, #F9FAFB 100%);
-      border: 1px solid #E5E7EB;
-      border-radius: 12px;
-      padding: 0;
+      background: linear-gradient(160deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.98) 100%);
+      border: 1px solid rgba(96, 165, 250, 0.35);
+      border-radius: 18px;
+      padding: 16px;
       animation: fadeInUp 0.8s ease-out 0.2s both;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 28px 60px rgba(2, 6, 23, 0.45);
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       width: 100%;
       margin: 0 auto;
+      position: relative;
     }
 
-    .analytics-diagram svg {
+    .analytics-diagram img {
       width: 100%;
-      height: auto;
+      height: 280px;
       max-width: 100%;
+      object-fit: cover;
       display: block;
-      filter: drop-shadow(0 2px 8px rgba(59, 130, 246, 0.1));
-      transition: filter 0.3s ease;
+      border-radius: 12px;
+      filter: saturate(1.02) contrast(1.05);
+      transition: transform 0.35s ease, filter 0.35s ease;
     }
 
-    .analytics-diagram:hover svg {
-      filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.2));
+    .analytics-diagram:hover img {
+      transform: scale(1.03);
+      filter: saturate(1.06) contrast(1.08);
     }
 
-    .analytics-diagram svg circle {
-      animation: fadeInUp 0.6s ease-out;
+    .hero-visual-label {
+      position: absolute;
+      bottom: 26px;
+      left: 26px;
+      background: rgba(15, 23, 42, 0.88);
+      color: #E2E8F0;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 0.78rem;
+      line-height: 1.4;
+      max-width: 210px;
     }
 
-    .analytics-diagram svg polyline {
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      animation: slideInRight 0.8s ease-out 0.3s both;
+    .hero-visual-label strong {
+      display: block;
+      color: #F8FAFC;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
     }
 
     @media (min-width: 768px) {
       .analytics-diagram {
-        min-height: 450px;
+        padding: 18px;
+      }
+
+      .analytics-diagram img {
+        height: 360px;
       }
     }
 
     @media (min-width: 1024px) {
-      .analytics-diagram {
-        min-height: 520px;
+      .analytics-diagram img {
+        height: 430px;
       }
     }
 
@@ -700,9 +789,10 @@
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <div class="hero-content">
+                    <span class="hero-tag">Live Portfolio Intelligence</span>
                     <h1>Advanced Crypto Asset Management</h1>
-                    <p>Manage, grow, and secure your digital wealth with institutional-grade tools and real-time analytics. PRISM is the platform where traders and investors thrive.</p>
-                    <div>
+                    <p>Track performance, automate strategy execution, and protect your capital in one clear workspace built for modern crypto investors.</p>
+                    <div class="hero-cta">
                         <a href="/investments" class="btn-primary-hero">Start Investing</a>
                         @auth
                             <a href="/dashboard" class="btn-secondary-hero">Dashboard</a>
@@ -710,66 +800,25 @@
                             <a href="/register" class="btn-secondary-hero">Create Account</a>
                         @endauth
                     </div>
+                    <ul class="hero-stats">
+                        <li>
+                            <strong>$1.2M+</strong>
+                            <span>Assets Tracked</span>
+                        </li>
+                        <li>
+                            <strong>24/7</strong>
+                            <span>Market Monitoring</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="analytics-diagram">
-                    <svg class="img-fluid rounded-3" viewBox="0 0 520 420" style="box-shadow: 0 20px 60px rgba(0,0,0,0.2); background: linear-gradient(135deg, #1E293B 0%, #334155 100%); border-radius: 12px;" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Grid background -->
-                    <defs>
-                        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(59, 130, 246, 0.1)" stroke-width="1"/>
-                        </pattern>
-                    </defs>
-                    <rect width="520" height="420" fill="url(#grid)" />
-                    
-                    <!-- Analytics Chart -->
-                    <g transform="translate(50, 50)">
-                        <!-- Chart title -->
-                        <text x="0" y="20" font-size="20" font-weight="bold" fill="#F8FAFC">Portfolio Performance</text>
-                        
-                        <!-- Chart line -->
-                        <polyline points="0,150 30,130 60,110 90,125 120,85 150,95 180,60 210,70 220,50" 
-                                  fill="none" stroke="#3B82F6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                        
-                        <!-- Chart area gradient -->
-                        <defs>
-                            <linearGradient id="chartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:0.3" />
-                                <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:0" />
-                            </linearGradient>
-                        </defs>
-                        <polygon points="0,150 30,130 60,110 90,125 120,85 150,95 180,60 210,70 220,50 220,200 0,200" 
-                                 fill="url(#chartGrad)" />
-                        
-                        <!-- Y-axis labels -->
-                        <text x="-30" y="155" font-size="12" fill="#94A3B8">$0</text>
-                        <text x="-30" y="85" font-size="12" fill="#94A3B8">$50K</text>
-                        <text x="-30" y="15" font-size="12" fill="#94A3B8">$100K</text>
-                        
-                        <!-- X-axis -->
-                        <line x1="0" y1="200" x2="220" y2="200" stroke="#475569" stroke-width="1" />
-                        
-                        <!-- Data points -->
-                        <circle cx="0" cy="150" r="4" fill="#3B82F6" />
-                        <circle cx="30" cy="130" r="4" fill="#3B82F6" />
-                        <circle cx="60" cy="110" r="4" fill="#3B82F6" />
-                        <circle cx="220" cy="50" r="4" fill="#10B981" />
-                    </g>
-                    
-                    <!-- Stats boxes -->
-                    <g transform="translate(50, 280)">
-                        <rect x="0" y="0" width="100" height="80" rx="8" fill="rgba(59, 130, 246, 0.1)" stroke="#3B82F6" stroke-width="1"/>
-                        <text x="10" y="20" font-size="12" fill="#94A3B8">Total Assets</text>
-                        <text x="10" y="45" font-size="18" font-weight="bold" fill="#F8FAFC">$1.2M</text>
-                        <text x="10" y="65" font-size="11" fill="#10B981">+12.5% 24h</text>
-                        
-                        <rect x="130" y="0" width="100" height="80" rx="8" fill="rgba(16, 185, 129, 0.1)" stroke="#10B981" stroke-width="1"/>
-                        <text x="140" y="20" font-size="12" fill="#94A3B8">Daily Gain</text>
-                        <text x="140" y="45" font-size="18" font-weight="bold" fill="#F8FAFC">$8,420</text>
-                        <text x="140" y="65" font-size="11" fill="#10B981">+2.3% Today</text>
-                    </g>
-                </svg>
+                    <img src="{{ asset('static/images/flare2.png') }}" alt="Trading dashboard preview">
+                    <div class="hero-visual-label">
+                        <strong>Portfolio Command Center</strong>
+                        Real-time signals and risk controls in one unified view.
+                    </div>
                 </div>
             </div>
         </div>
