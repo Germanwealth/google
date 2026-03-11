@@ -378,6 +378,74 @@
         height: 100%;
     }
 
+    .chart-shell {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .chart-shell::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+            radial-gradient(circle at 85% 18%, rgba(57, 208, 255, 0.14), transparent 24%),
+            linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 55%);
+        pointer-events: none;
+    }
+
+    .chart-grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 18px;
+    }
+
+    .chart-stage {
+        position: relative;
+        min-height: 270px;
+        border-radius: 22px;
+        overflow: hidden;
+        background:
+            linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+            linear-gradient(180deg, rgba(6, 20, 38, 0.96) 0%, rgba(13, 24, 44, 0.92) 100%);
+        background-size: 100% 54px, 54px 100%, 100% 100%;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .chart-svg {
+        width: 100%;
+        height: 100%;
+        min-height: 270px;
+        display: block;
+    }
+
+    .chart-stats {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .chart-stat {
+        padding: 14px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .chart-stat span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.76rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+    }
+
+    .chart-stat strong {
+        font-size: 1.02rem;
+    }
+
     .panel-head {
         display: flex;
         justify-content: space-between;
@@ -429,7 +497,7 @@
 
     .board-row {
         display: grid;
-        grid-template-columns: 1.2fr 1fr 0.9fr;
+        grid-template-columns: 1.2fr 1fr 0.9fr 110px;
         gap: 10px;
         align-items: center;
         padding: 14px 16px;
@@ -462,6 +530,12 @@
         text-align: right;
         font-weight: 700;
         font-size: 0.88rem;
+    }
+
+    .sparkline {
+        width: 100%;
+        height: 38px;
+        display: block;
     }
 
     .up { color: var(--green); }
@@ -626,7 +700,8 @@
         }
 
         .hero-grid,
-        .market-grid {
+        .market-grid,
+        .chart-grid {
             grid-template-columns: 1.15fr 0.85fr;
         }
 
@@ -648,11 +723,20 @@
             text-align: left;
         }
 
+        .sparkline {
+            height: 46px;
+        }
+
         .macro-price,
         .panel-head,
         .airdrop-top {
             flex-direction: column;
             align-items: flex-start;
+        }
+
+        .chart-stage,
+        .chart-svg {
+            min-height: 220px;
         }
     }
 </style>
@@ -667,8 +751,8 @@
                     <span class="eyebrow">Real-time market room</span>
                     <h1>Forex flow, crypto tape, and airdrop radar in one screen.</h1>
                     <p class="hero-copy">
-                        cryptorank now opens like a live dealing desk. Visitors see streaming forex pairs, crypto movers,
-                        fast exchange-rate snapshots, and high-attention airdrop opportunities without the page feeling flat or fake.
+                        cryptorank puts airdrops at the center of the experience, pairing live market motion with wallet-ready
+                        farming signals, rotation themes, and high-attention opportunities that feel current the moment the page loads.
                     </p>
                     <div class="hero-actions">
                         <a href="{{ route('register') }}" class="btn-live">Open Live Dashboard</a>
@@ -703,7 +787,7 @@
                         <div class="macro-price">
                             <div>
                                 <strong id="hero-price">$0.00</strong>
-                                <span id="hero-subtext">24h spot snapshot</span>
+                                <span id="hero-subtext">24h volume loading...</span>
                             </div>
                             <span id="hero-delta" class="delta up">+0.00%</span>
                         </div>
@@ -750,6 +834,43 @@
 
             <div class="ticker-ribbon">
                 <div class="ticker-track" id="ticker-track"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-wrap section-block">
+        <div class="container-xl mx-auto">
+            <div class="panel chart-shell">
+                <div class="panel-head">
+                    <div>
+                        <h2>Live market graph</h2>
+                        <p>Responsive trend surface with rotating sessions, volume, and breakout pressure.</p>
+                    </div>
+                    <span class="live-pill" id="chart-status">Chart stream live</span>
+                </div>
+                <div class="chart-grid">
+                    <div class="chart-stage">
+                        <svg class="chart-svg" id="market-chart" viewBox="0 0 900 320" preserveAspectRatio="none" aria-label="Live market graph"></svg>
+                    </div>
+                    <div class="chart-stats">
+                        <div class="chart-stat">
+                            <span>Session Trend</span>
+                            <strong id="chart-trend">Breakout forming</strong>
+                        </div>
+                        <div class="chart-stat">
+                            <span>Impulse</span>
+                            <strong id="chart-impulse">+2.84%</strong>
+                        </div>
+                        <div class="chart-stat">
+                            <span>Volume Node</span>
+                            <strong id="chart-volume">$842M</strong>
+                        </div>
+                        <div class="chart-stat">
+                            <span>Volatility Band</span>
+                            <strong id="chart-volatility">Compressed</strong>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -926,6 +1047,83 @@
     const changeClass = (value) => value >= 0 ? 'up' : 'down';
     const changeText = (value) => `${value >= 0 ? '+' : ''}${value.toFixed(2)}%`;
 
+    function generateSeries(points = 18, strength = 1.6, bias = 0) {
+        let value = 100 + bias;
+        return Array.from({ length: points }, (_, index) => {
+            value += (Math.random() - 0.48) * strength + Math.sin(index / 3) * 0.32;
+            return Number(value.toFixed(2));
+        });
+    }
+
+    function buildSparkline(values, positive = true) {
+        const width = 110;
+        const height = 38;
+        const min = Math.min(...values);
+        const max = Math.max(...values);
+        const range = max - min || 1;
+        const points = values.map((value, index) => {
+            const x = (index / (values.length - 1)) * width;
+            const y = height - ((value - min) / range) * (height - 6) - 3;
+            return `${x.toFixed(2)},${y.toFixed(2)}`;
+        }).join(' ');
+
+        const stroke = positive ? '#32d583' : '#ff6b7a';
+        const fill = positive ? 'rgba(50, 213, 131, 0.15)' : 'rgba(255, 107, 122, 0.15)';
+
+        return `
+            <svg class="sparkline" viewBox="0 0 110 38" preserveAspectRatio="none" aria-hidden="true">
+                <polyline points="0,38 ${points} 110,38" fill="${fill}" stroke="none"></polyline>
+                <polyline points="${points}" fill="none" stroke="${stroke}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></polyline>
+            </svg>
+        `;
+    }
+
+    function renderMarketChart(rows) {
+        const chart = document.getElementById('market-chart');
+        const lead = rows[0] || fallbackCrypto[0];
+        const overlay = rows[1] || fallbackCrypto[1];
+        const seriesA = generateSeries(28, 2.4, lead.change * 1.4);
+        const seriesB = generateSeries(28, 1.7, overlay.change * 1.1);
+
+        const toPoints = (series, width, height, top, bottom) => {
+            const min = Math.min(...series);
+            const max = Math.max(...series);
+            const range = max - min || 1;
+            return series.map((value, index) => {
+                const x = (index / (series.length - 1)) * width;
+                const y = bottom - ((value - min) / range) * (bottom - top);
+                return `${x.toFixed(2)},${y.toFixed(2)}`;
+            }).join(' ');
+        };
+
+        const pointsA = toPoints(seriesA, 900, 320, 28, 280);
+        const pointsB = toPoints(seriesB, 900, 320, 48, 290);
+        const areaA = `0,320 ${pointsA} 900,320`;
+        const areaB = `0,320 ${pointsB} 900,320`;
+
+        chart.innerHTML = `
+            <defs>
+                <linearGradient id="chartAreaA" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="rgba(57, 208, 255, 0.38)" />
+                    <stop offset="100%" stop-color="rgba(57, 208, 255, 0.02)" />
+                </linearGradient>
+                <linearGradient id="chartAreaB" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="rgba(255, 207, 90, 0.26)" />
+                    <stop offset="100%" stop-color="rgba(255, 207, 90, 0.02)" />
+                </linearGradient>
+            </defs>
+            <polyline points="${areaB}" fill="url(#chartAreaB)" stroke="none"></polyline>
+            <polyline points="${areaA}" fill="url(#chartAreaA)" stroke="none"></polyline>
+            <polyline points="${pointsB}" fill="none" stroke="#ffcf5a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></polyline>
+            <polyline points="${pointsA}" fill="none" stroke="#39d0ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></polyline>
+        `;
+
+        document.getElementById('chart-trend').textContent = lead.change >= 0 ? 'Breakout forming' : 'Reversal watch';
+        document.getElementById('chart-impulse').textContent = changeText(lead.change);
+        document.getElementById('chart-volume').textContent = '$' + (680 + Math.random() * 420).toFixed(0) + 'M';
+        document.getElementById('chart-volatility').textContent = Math.abs(lead.change) > 2 ? 'Expanded' : 'Compressed';
+    }
+
     function renderRows(targetId, rows) {
         const target = document.getElementById(targetId);
         target.innerHTML = rows.map((row) => `
@@ -936,6 +1134,7 @@
                 </div>
                 <div class="rate">${row.price ? formatPrice(row.price) : formatRate(row.rate)}</div>
                 <div class="change ${changeClass(row.change)}">${changeText(row.change)}</div>
+                <div>${buildSparkline(generateSeries(14, 1.2, row.change), row.change >= 0)}</div>
             </div>
         `).join('');
     }
@@ -972,10 +1171,27 @@
         });
     }
 
+    function updateHeroMetrics(lead) {
+        const dailyVolume = (lead.price * (620000 + Math.random() * 180000)).toLocaleString(undefined, {
+            maximumFractionDigits: 0
+        });
+        const dominance = (48 + Math.random() * 8).toFixed(2);
+        const funding = ((Math.random() - 0.3) * 0.04).toFixed(3);
+        const openInterest = (8 + Math.random() * 6).toFixed(2);
+
+        document.getElementById('hero-subtext').textContent = `24h vol $${dailyVolume} | dom ${dominance}% | funding ${funding}%`;
+        document.getElementById('macro-dxy').textContent = (103.8 + Math.random() * 1.2).toFixed(2);
+        document.getElementById('macro-ethbtc').textContent = (0.051 + Math.random() * 0.004).toFixed(4);
+        document.getElementById('macro-gas').textContent = `${10 + Math.floor(Math.random() * 14)} gwei`;
+        document.getElementById('macro-sentiment').textContent = lead.change >= 0
+            ? `Risk-On / OI ${openInterest}B`
+            : `Mixed tape / OI ${openInterest}B`;
+    }
+
     function renderHero(cryptoRows) {
         const lead = cryptoRows[0] || fallbackCrypto[0];
         document.getElementById('hero-price').textContent = formatPrice(lead.price);
-        document.getElementById('hero-subtext').textContent = `${lead.name} / rolling 24h spot`;
+        updateHeroMetrics(lead);
 
         const delta = document.getElementById('hero-delta');
         delta.textContent = changeText(lead.change);
@@ -1030,10 +1246,13 @@
 
     async function loadForex() {
         try {
-            const response = await fetch('https://api.frankfurter.dev/v1/latest?base=USD&symbols=EUR,GBP,JPY,CHF,CAD,AUD,NGN,AED');
+            const response = await fetch('https://open.er-api.com/v6/latest/USD');
             if (!response.ok) throw new Error('fx feed failed');
             const data = await response.json();
             const rates = data.rates || {};
+            if (!rates.EUR || !rates.GBP || !rates.JPY || !rates.CHF || !rates.CAD || !rates.AUD || !rates.NGN || !rates.AED) {
+                throw new Error('required fx pairs missing');
+            }
             const rows = [
                 { pair: 'EUR/USD', note: 'Euro vs US Dollar', rate: 1 / rates.EUR, change: 0.18 },
                 { pair: 'GBP/USD', note: 'British Pound vs US Dollar', rate: 1 / rates.GBP, change: 0.11 },
@@ -1092,6 +1311,7 @@
             ...rateRows.slice(0, 2)
         ]);
         renderHero(cryptoRows);
+        renderMarketChart(cryptoRows);
         updateHeaderMetrics(cryptoRows, fxRows);
 
         setInterval(() => {
@@ -1108,13 +1328,9 @@
                 ...rateRows.slice(0, 2)
             ]);
             renderHero(cryptoRows);
+            renderMarketChart(cryptoRows);
             updateHeaderMetrics(cryptoRows, fxRows);
         }, 12000);
-
-        document.getElementById('macro-dxy').textContent = (103.8 + Math.random() * 1.2).toFixed(2);
-        document.getElementById('macro-ethbtc').textContent = (0.051 + Math.random() * 0.004).toFixed(4);
-        document.getElementById('macro-gas').textContent = `${10 + Math.floor(Math.random() * 14)} gwei`;
-        document.getElementById('macro-sentiment').textContent = cryptoRows[0].change >= 0 ? 'Risk-On' : 'Mixed tape';
     }
 
     bootMarketPage();
