@@ -1,4 +1,13 @@
 <x-guest-layout>
+    <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.75rem; line-height: 1.1; font-weight: 800; letter-spacing: -0.03em; color: #edf4ff; margin-bottom: 0.65rem;">
+            Sign in
+        </h2>
+        <p style="color: #9fb0c8; line-height: 1.7; margin: 0;">
+            Continue to the live dashboard, review market movement, and manage your account with the updated branded interface.
+        </p>
+    </div>
+
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -32,16 +41,23 @@
             </label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
+        <div class="flex items-center justify-between mt-6" style="gap: 1rem; flex-wrap: wrap;">
             @if (Route::has('password.request'))
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
                     {{ __('Forgot your password?') }}
                 </a>
             @endif
 
-            <x-primary-button class="ms-3">
+            <x-primary-button class="ms-0">
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
+
+        @if (Route::has('register'))
+            <div style="margin-top: 1.25rem; color: #9fb0c8; font-size: 0.95rem;">
+                Need access?
+                <a href="{{ route('register') }}" style="font-weight: 700; text-decoration: none;">Create an account</a>
+            </div>
+        @endif
     </form>
 </x-guest-layout>
