@@ -16,19 +16,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create default test user
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Create default test user (only if not exists)
+        User::firstOrCreate(
+            ['email' => 'test@example.com'],
+            [
+                'name' => 'Test User',
+                'password' => Hash::make('password'),
+            ]
+        );
 
-        // Create default admin user
-        User::create([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('admin123456'),
-            'is_admin' => true,
-            'email_verified_at' => now(),
-        ]);
+        // Create default admin user (only if not exists)
+        User::firstOrCreate(
+            ['email' => 'admin@example.com'],
+            [
+                'name' => 'Admin User',
+                'password' => Hash::make('admin123456'),
+                'is_admin' => true,
+                'email_verified_at' => now(),
+            ]
+        );
     }
 }
