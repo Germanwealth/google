@@ -13,6 +13,8 @@ QUEUE_CONNECTION = "sync"
 SESSION_DRIVER = "file"
 SESSION_LIFETIME = "120"
 VITE_APP_NAME = "cryptorank"
+RUN_MIGRATIONS = "true"
+DB_SEED = "false"
 
 [deploy]
 startCommand = "supervisord -c /etc/supervisord.conf"

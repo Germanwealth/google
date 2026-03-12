@@ -1,19 +1,40 @@
 #!/bin/sh
 set -e
 
+echo "🚀 Starting application bootstrap..."
+
 # Generate APP_KEY if not set
 if [ -z "$APP_KEY" ]; then
     echo "🔑 Generating APP_KEY..."
     php artisan key:generate --force
 fi
 
-# Run migrations
-echo "📦 Running database migrations..."
-php artisan migrate --force
+if [ "${RUN_MIGRATIONS:-true}" = "true" ]; then
+    echo "⏳ Waiting for database connection..."
+    attempts=0
+    until php artisan migrate:status >/dev/null 2>&1; do
+        attempts=$((attempts + 1))
 
-# Seed database
-echo "🌱 Seeding database..."
-php artisan db:seed --force
+        if [ "$attempts" -ge 30 ]; then
+            echo "❌ Database did not become ready in time."
+            exit 1
+        fi
+
+        sleep 2
+    done
+
+    echo "📦 Running database migrations..."
+    php artisan migrate --force
+else
+    echo "⏭️ Skipping migrations because RUN_MIGRATIONS=${RUN_MIGRATIONS}"
+fi
+
+if [ "${DB_SEED:-false}" = "true" ]; then
+    echo "🌱 Seeding database..."
+    php artisan db:seed --force
+else
+    echo "⏭️ Skipping database seeding."
+fi
 
 # Cache routes, config, and views for production
 echo "⚡ Caching configuration..."
