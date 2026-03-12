@@ -148,6 +148,23 @@
         margin-bottom: 24px;
     }
 
+    .hero-note {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 26px;
+    }
+
+    .hero-note span {
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: #d8e7fb;
+        font-size: 0.84rem;
+        font-weight: 600;
+    }
+
     .btn-live,
     .btn-ghost-live {
         display: inline-flex;
@@ -641,6 +658,74 @@
         color: var(--text);
     }
 
+    .claim-grid {
+        display: grid;
+        gap: 20px;
+    }
+
+    .claim-card {
+        padding: 24px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.03));
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
+    }
+
+    .claim-steps {
+        display: grid;
+        gap: 14px;
+    }
+
+    .claim-step {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        padding: 14px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .claim-step-index {
+        flex-shrink: 0;
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #39d0ff 0%, #ffcf5a 100%);
+        color: #08101d;
+        font-weight: 800;
+    }
+
+    .claim-step strong,
+    .claim-card strong {
+        display: block;
+        margin-bottom: 4px;
+    }
+
+    .claim-step p,
+    .claim-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+    }
+
+    .claim-checklist {
+        display: grid;
+        gap: 12px;
+        margin-top: 18px;
+    }
+
+    .claim-checklist div {
+        padding: 13px 14px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        color: #dce9fa;
+        font-size: 0.92rem;
+    }
+
     .headline-strip {
         display: flex;
         flex-wrap: wrap;
@@ -701,7 +786,8 @@
 
         .hero-grid,
         .market-grid,
-        .chart-grid {
+        .chart-grid,
+        .claim-grid {
             grid-template-columns: 1.15fr 0.85fr;
         }
 
@@ -748,15 +834,20 @@
         <div class="container-xl mx-auto">
             <div class="hero-grid">
                 <div class="hero-card">
-                    <span class="eyebrow">Real-time market room</span>
-                    <h1>Forex flow, crypto tape, and airdrop radar in one screen.</h1>
+                    <span class="eyebrow">Live claim hub</span>
+                    <h1>Track FX, watch crypto, and connect your wallet to claim airdrops.</h1>
                     <p class="hero-copy">
-                        cryptorank puts airdrops at the center of the experience, pairing live market motion with wallet-ready
-                        farming signals, rotation themes, and high-attention opportunities that feel current the moment the page loads.
+                        This homepage now feels like a live claim dashboard: real-time FX context, active crypto pricing,
+                        and clear guidance for users who want to connect a wallet and move into airdrop eligibility or claim flows.
                     </p>
+                    <div class="hero-note">
+                        <span>Wallet connection required for claim access</span>
+                        <span>FX and crypto context stays visible</span>
+                        <span>Designed for a cleaner, more credible first impression</span>
+                    </div>
                     <div class="hero-actions">
-                        <a href="{{ route('register') }}" class="btn-live">Open Live Dashboard</a>
-                        <a href="{{ route('connect') }}" class="btn-ghost-live">Connect Wallet Intelligence</a>
+                        <a href="{{ route('connect') }}" class="btn-live">Connect Wallet to Claim</a>
+                        <a href="{{ route('register') }}" class="btn-ghost-live">Open Live Dashboard</a>
                     </div>
                     <div class="stat-grid">
                         <div class="stat-chip">
@@ -815,18 +906,18 @@
                     <div class="panel">
                         <div class="panel-head">
                             <div>
-                                <h3>Macro headlines</h3>
-                                <p>Fast-moving themes that make the page feel active.</p>
+                                <h3>Claim desk headlines</h3>
+                                <p>Professional callouts that frame market activity around wallet-based claiming.</p>
                             </div>
                             <span class="live-pill">Live ribbon</span>
                         </div>
                         <div class="headline-strip">
-                            <span>USD strength rotating into majors</span>
-                            <span>BTC dominance holding above key band</span>
-                            <span>Layer-2 airdrop farming accelerating</span>
-                            <span>Stablecoin flows rising</span>
-                            <span>Asia open volatility watch</span>
-                            <span>High beta altcoins rebounding</span>
+                            <span>Connect wallet to unlock claim workflow</span>
+                            <span>FX momentum helps time risk windows</span>
+                            <span>High-attention airdrops remain in focus</span>
+                            <span>Stablecoin flows support claim activity</span>
+                            <span>Cross-chain narratives still matter</span>
+                            <span>Cleaner onboarding improves trust</span>
                         </div>
                     </div>
                 </div>
@@ -840,11 +931,66 @@
 
     <section class="section-wrap section-block">
         <div class="container-xl mx-auto">
+            <div class="claim-grid">
+                <div class="claim-card">
+                    <div class="panel-head">
+                        <div>
+                            <h2>How wallet claiming works</h2>
+                            <p>A more professional explanation of the flow shown directly on the homepage.</p>
+                        </div>
+                        <span class="live-pill">Claim guide</span>
+                    </div>
+                    <div class="claim-steps">
+                        <div class="claim-step">
+                            <span class="claim-step-index">1</span>
+                            <div>
+                                <strong>Connect your wallet</strong>
+                                <p>Start from the wallet page to link a supported wallet before checking claim access.</p>
+                            </div>
+                        </div>
+                        <div class="claim-step">
+                            <span class="claim-step-index">2</span>
+                            <div>
+                                <strong>Confirm eligibility</strong>
+                                <p>Use the claim flow to review campaign status, wallet activity, and current participation requirements.</p>
+                            </div>
+                        </div>
+                        <div class="claim-step">
+                            <span class="claim-step-index">3</span>
+                            <div>
+                                <strong>Complete your claim</strong>
+                                <p>Finalize the process inside the connected-wallet experience once the claim window is active.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="claim-card">
+                    <div class="panel-head">
+                        <div>
+                            <h2>Before you connect</h2>
+                            <p>Simple trust-building guidance that makes the page feel more polished and credible.</p>
+                        </div>
+                        <span class="live-pill">Checklist</span>
+                    </div>
+                    <div class="claim-checklist">
+                        <div>Use a primary wallet you want associated with the airdrop claim.</div>
+                        <div>Review the live market panels to understand current FX and crypto conditions.</div>
+                        <div>Connect from the claim page when you are ready to continue the wallet flow.</div>
+                        <div>Keep an eye on featured opportunities and active campaign windows below.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-wrap section-block">
+        <div class="container-xl mx-auto">
             <div class="panel chart-shell">
                 <div class="panel-head">
                     <div>
                         <h2>Live market graph</h2>
-                        <p>Responsive trend surface with rotating sessions, volume, and breakout pressure.</p>
+                        <p>Professional market context that keeps the claim-focused homepage feeling active and informed.</p>
                     </div>
                     <span class="live-pill" id="chart-status">Chart stream live</span>
                 </div>
@@ -882,7 +1028,7 @@
                     <div class="panel-head">
                         <div>
                             <h2>Live forex board</h2>
-                            <p>Major pairs with instant rate direction and confidence cues.</p>
+                            <p>Major FX pairs provide context for risk appetite, liquidity, and timing around claim activity.</p>
                         </div>
                         <span class="live-pill" id="fx-status">Updating FX</span>
                     </div>
@@ -893,7 +1039,7 @@
                     <div class="panel-head">
                         <div>
                             <h2>Exchange-rate matrix</h2>
-                            <p>Useful cash conversion anchors for global users.</p>
+                            <p>Clean conversion references for users following campaigns across different regions.</p>
                         </div>
                         <span class="live-pill" id="matrix-status">Updating rates</span>
                     </div>
@@ -909,7 +1055,7 @@
                 <div class="panel-head">
                     <div>
                         <h2>Crypto movers tape</h2>
-                        <p>Streaming majors and high-attention names with auto-refresh and fallback feed.</p>
+                        <p>Streaming majors and high-attention assets that support the wallet-claim narrative.</p>
                     </div>
                     <span class="live-pill" id="crypto-status">Loading crypto</span>
                 </div>
@@ -924,7 +1070,7 @@
                 <div class="panel-head">
                     <div>
                         <h2>Featured airdrop radar</h2>
-                        <p>Visually rich opportunity cards so the app feels current, researched, and high-value.</p>
+                        <p>Opportunity cards that make the homepage feel current, structured, and claim-ready.</p>
                     </div>
                     <span class="live-pill">Curated watchlist</span>
                 </div>
@@ -986,11 +1132,12 @@
             </div>
 
             <div class="cta-band">
-                <h2>Built to look active on first load, not empty.</h2>
+                <h2>Ready to connect a wallet and move into the claim flow?</h2>
                 <p>
-                    The homepage now behaves like a market intelligence surface instead of a static promo page. It fetches public crypto and FX data in the browser, falls back gracefully when feeds fail, and keeps the visual energy high with moving tickers and updating boards.
+                    The homepage keeps all of the FX and market-energy pieces, but the message is now cleaner:
+                    users land here, understand the opportunity, and know that connecting a wallet is the next step to claim.
                 </p>
-                <a href="{{ route('register') }}" class="btn-live">Create Account</a>
+                <a href="{{ route('connect') }}" class="btn-live">Go to Wallet Connect</a>
             </div>
         </div>
     </section>
