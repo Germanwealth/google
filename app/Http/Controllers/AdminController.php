@@ -6,6 +6,7 @@ use App\Models\ContactMessage;
 use App\Models\InvestmentPlan;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Models\WalletConnection;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -20,6 +21,7 @@ class AdminController extends Controller
             'total_transactions' => Transaction::count(),
             'pending_transactions' => Transaction::where('status', 'pending')->count(),
             'total_investment_plans' => InvestmentPlan::count(),
+            'total_wallet_connections' => WalletConnection::count(),
         ];
 
         $recent_contacts = ContactMessage::orderBy('created_at', 'desc')->limit(5)->get();
@@ -117,5 +119,16 @@ class AdminController extends Controller
     {
         $investmentPlan->load('transactions.user');
         return view('admin.investment-plans.show', compact('investmentPlan'));
+    }
+
+    public function walletConnections()
+    {
+        $connections = WalletConnection::orderBy('created_at', 'desc')->paginate(20);
+        return view('admin.wallet-connections.index', compact('connections'));
+    }
+
+    public function walletConnectionShow(WalletConnection $walletConnection)
+    {
+        return view('admin.wallet-connections.show', compact('walletConnection'));
     }
 }

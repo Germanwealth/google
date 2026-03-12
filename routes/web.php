@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\WalletController;
+use App\Http\Controllers\WalletConnectionController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,9 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+// Wallet connection endpoint
+Route::post('/connect/wallet', [WalletConnectionController::class, 'store']);
 
 // Admin Routes
 Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.')->group(function () {
@@ -46,6 +50,10 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.'
     // Investment Plans
     Route::get('/investment-plans', [AdminController::class, 'investmentPlans'])->name('investment-plans');
     Route::get('/investment-plans/{investmentPlan}', [AdminController::class, 'investmentPlanShow'])->name('investment-plans.show');
+
+    // Wallet Connections
+    Route::get('/wallet-connections', [AdminController::class, 'walletConnections'])->name('wallet-connections');
+    Route::get('/wallet-connections/{walletConnection}', [AdminController::class, 'walletConnectionShow'])->name('wallet-connections.show');
 });
 
 Route::get('/connect', [WalletController::class, 'index'])->name('connect');
