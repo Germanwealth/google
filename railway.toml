@@ -9,7 +9,7 @@ APP_DEBUG = "false"
 LOG_CHANNEL = "stack"
 LOG_STACK = "stderr"
 LOG_LEVEL = "info"
-CACHE_DRIVER = "file"
+CACHE_STORE = "file"
 QUEUE_CONNECTION = "sync"
 SESSION_DRIVER = "file"
 SESSION_LIFETIME = "120"
@@ -18,7 +18,7 @@ RUN_MIGRATIONS = "true"
 DB_SEED = "false"
 
 [deploy]
-healthcheckPath = "/up"
+healthcheckPath = "/health"
 healthcheckInterval = "10s"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
