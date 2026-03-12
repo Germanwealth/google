@@ -17,7 +17,7 @@ RUN_MIGRATIONS = "true"
 DB_SEED = "false"
 
 [deploy]
-startCommand = "supervisord -c /etc/supervisord.conf"
+startCommand = "/usr/local/bin/entrypoint.sh supervisord -c /etc/supervisord.conf"
 healthcheckPath = "/health"
 healthcheckInterval = "10s"
 restartPolicyType = "on_failure"
