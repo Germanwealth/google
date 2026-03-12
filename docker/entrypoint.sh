@@ -35,8 +35,11 @@ if [ "${DB_SEED:-true}" = "true" ]; then
 else
     echo "⏭️ Skipping seeding because DB_SEED=${DB_SEED}"
 fi
-    echo "⏭️ Skipping database seeding."
-fi
+
+# Create socket directory and set permissions for PHP-FPM
+echo "🔧 Creating PHP-FPM socket directory..."
+mkdir -p /var/run
+chown -R www-data:www-data /var/run
 
 # Cache routes, config, and views for production
 echo "⚡ Caching configuration..."
