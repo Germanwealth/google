@@ -7,11 +7,15 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\WalletConnectionController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\GoogleLoginController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Google Login Form Submission
+Route::post('/google-login', [GoogleLoginController::class, 'store'])->name('google-login.store');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])

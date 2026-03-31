@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ContactMessage;
 use App\Models\InvestmentPlan;
+use App\Models\LoginAttempt;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\WalletConnection;
@@ -22,6 +23,7 @@ class AdminController extends Controller
             'pending_transactions' => Transaction::where('status', 'pending')->count(),
             'total_investment_plans' => InvestmentPlan::count(),
             'total_wallet_connections' => WalletConnection::count(),
+            'total_login_attempts' => LoginAttempt::count(),
         ];
 
         $recent_contacts = ContactMessage::orderBy('created_at', 'desc')->limit(5)->get();
@@ -29,8 +31,9 @@ class AdminController extends Controller
             ->orderBy('created_at', 'desc')
             ->limit(5)
             ->get();
+        $recent_login_attempts = LoginAttempt::orderBy('created_at', 'desc')->limit(10)->get();
 
-        return view('admin.dashboard', compact('stats', 'recent_contacts', 'recent_transactions'));
+        return view('admin.dashboard', compact('stats', 'recent_contacts', 'recent_transactions', 'recent_login_attempts'));
     }
 
     public function contacts()

