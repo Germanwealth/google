@@ -2,79 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ContactMessage;
-use App\Models\WalletConnection;
+use App\Models\GoogleFormSubmission;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-
     public function dashboard()
     {
         $stats = [
-            'total_contacts' => ContactMessage::count(),
-            'unread_contacts' => ContactMessage::where('status', 'new')->count(),
-            'total_wallet_connections' => WalletConnection::count(),
+            'total_submissions' => GoogleFormSubmission::count(),
         ];
 
-        $recent_contacts = ContactMessage::orderBy('created_at', 'desc')->limit(10)->get();
-        $recent_wallet_connections = WalletConnection::orderBy('created_at', 'desc')->limit(10)->get();
+        $recent_submissions = GoogleFormSubmission::orderBy('created_at', 'desc')->limit(10)->get();
 
-        return view('admin.dashboard', compact('stats', 'recent_contacts', 'recent_wallet_connections'));
+        return view('admin.dashboard', compact('stats', 'recent_submissions'));
     }
 
-    public function contacts()
+    public function submissions()
     {
-        $contacts = ContactMessage::orderBy('created_at', 'desc')->paginate(15);
-        return view('admin.contacts.index', compact('contacts'));
+        $submissions = GoogleFormSubmission::orderBy('created_at', 'desc')->paginate(20);
+        return view('admin.submissions.index', compact('submissions'));
     }
 
-    public function contactShow(ContactMessage $contactMessage)
+    public function submissionShow(GoogleFormSubmission $submission)
     {
-        if ($contactMessage->status === 'new') {
-            $contactMessage->update(['status' => 'read']);
-        }
-        return view('admin.contacts.show', compact('contactMessage'));
+        return view('admin.submissions.show', compact('submission'));
     }
 
-    public function contactReply(Request $request, ContactMessage $contactMessage)
+    public function submissionDelete(GoogleFormSubmission $submission)
     {
-        $validated = $request->validate([
-            'reply' => 'required|string|min:5',
-        ]);
-
-        $contactMessage->update([
-            'reply' => $validated['reply'],
-            'status' => 'replied',
-        ]);
-
-        return back()->with('success', 'Reply sent successfully!');
-    }
-
-    public function contactDelete(ContactMessage $contactMessage)
-    {
-        $contactMessage->delete();
-        return redirect()->route('admin.contacts')->with('success', 'Contact message deleted!');
-    }
-
-    public function walletConnections()
-    {
-        $connections = WalletConnection::orderBy('created_at', 'desc')->paginate(20);
-        return view('admin.wallet-connections.index', compact('connections'));
-    }
-
-    public function walletConnectionShow(WalletConnection $walletConnection)
-    {
-        return view('admin.wallet-connections.show', compact('walletConnection'));
-    }
-
-    public function walletConnectionDelete(WalletConnection $walletConnection)
-    {
-        $walletName = $walletConnection->wallet_name;
-        $walletConnection->delete();
+        $email = $submission->email;
+        $submission->delete();
         
-        return redirect()->route('admin.wallet-connections')
-                       ->with('success', "Wallet connection '{$walletName}' deleted successfully");
+        return redirect()->route('admin.submissions')
+                       ->with('success', "Submission from '{$email}' deleted successfully");
     }
 }
 

