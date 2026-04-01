@@ -8,11 +8,11 @@ use App\Http\Controllers\WalletController;
 use App\Http\Controllers\WalletConnectionController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GoogleLoginController;
+use App\Http\Controllers\HealthController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index']);
 
 // Google Login Form Submission
 Route::post('/google-login', [GoogleLoginController::class, 'store'])->name('google-login.store');
@@ -65,6 +65,4 @@ Route::get('/connect', [WalletController::class, 'index'])->name('connect');
 Route::post('/connect', [WalletController::class, 'connect'])->name('connect.submit');
 
 // Health check endpoint for monitoring
-Route::get('/health', function () {
-    return response()->json(['status' => 'ok'], 200);
-});
+Route::get('/health', [HealthController::class, 'show']);
