@@ -42,14 +42,17 @@ echo "🔧 Creating PHP-FPM socket directory..."
 mkdir -p /var/run
 chown -R www-data:www-data /var/run
 
+# Clear old cache first
+echo "🧹 Clearing old cache..."
+php artisan cache:clear
+php artisan config:clear
+php artisan route:clear
+
 # Cache routes, config, and views for production
 echo "⚡ Caching configuration..."
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
-
-# Clear old cache
-php artisan cache:clear
 
 echo "✅ Application ready!"
 
