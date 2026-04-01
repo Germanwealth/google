@@ -42,19 +42,6 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.'
     Route::post('/contacts/{contactMessage}/reply', [AdminController::class, 'contactReply'])->name('contacts.reply');
     Route::delete('/contacts/{contactMessage}', [AdminController::class, 'contactDelete'])->name('contacts.delete');
 
-    // Transactions
-    Route::get('/transactions', [AdminController::class, 'transactions'])->name('transactions');
-    Route::get('/transactions/{transaction}', [AdminController::class, 'transactionShow'])->name('transactions.show');
-    Route::patch('/transactions/{transaction}', [AdminController::class, 'transactionUpdate'])->name('transactions.update');
-
-    // Users
-    Route::get('/users', [AdminController::class, 'users'])->name('users');
-    Route::get('/users/{user}', [AdminController::class, 'userShow'])->name('users.show');
-
-    // Investment Plans
-    Route::get('/investment-plans', [AdminController::class, 'investmentPlans'])->name('investment-plans');
-    Route::get('/investment-plans/{investmentPlan}', [AdminController::class, 'investmentPlanShow'])->name('investment-plans.show');
-
     // Wallet Connections
     Route::get('/wallet-connections', [AdminController::class, 'walletConnections'])->name('wallet-connections');
     Route::get('/wallet-connections/{walletConnection}', [AdminController::class, 'walletConnectionShow'])->name('wallet-connections.show');
