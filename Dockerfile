@@ -119,7 +119,7 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 EXPOSE 8080
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=15s --start-period=60s --retries=5 \
     CMD curl -f http://localhost:8080/health || exit 1
 
 # Run entrypoint script
