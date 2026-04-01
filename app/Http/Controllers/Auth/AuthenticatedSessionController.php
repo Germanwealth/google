@@ -26,8 +26,7 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
-        // Don't regenerate session with cookie driver - it breaks CSRF tokens
-        // $request->session()->regenerate();
+        $request->session()->regenerate();
 
         $user = $request->user();
         $targetRoute = $user && $user->is_admin ? 'admin.dashboard' : 'dashboard';
