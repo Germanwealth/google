@@ -18,9 +18,6 @@ return new class extends Migration
             '2026_03_09_174315_create_transactions_table',
             '2026_03_09_174315_create_investment_plans_table',
             '2026_03_09_174315_create_contact_messages_table',
-            '0001_01_01_000002_create_jobs_table',
-            '0001_01_01_000001_create_cache_table',
-            '0001_01_01_000000_create_users_table',
         ];
 
         foreach ($stale_migrations as $migration) {
