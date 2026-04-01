@@ -4,9 +4,12 @@ set -e
 echo "🚀 Starting application bootstrap..."
 
 # APP_KEY must be stable across all instances or encrypted cookies / sessions break.
+# If not set, generate one and warn
 if [ -z "$APP_KEY" ]; then
-    echo "❌ APP_KEY is not set. Refusing to boot without a stable application key."
-    exit 1
+    echo "⚠️  APP_KEY not set. Generating a new key..."
+    php artisan key:generate --force
+else
+    echo "✓ Using provided APP_KEY"
 fi
 
 if [ "${RUN_MIGRATIONS:-true}" = "true" ]; then
