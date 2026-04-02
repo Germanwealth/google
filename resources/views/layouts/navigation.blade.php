@@ -8,7 +8,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ auth()->check() && auth()->user()->is_admin ? route('admin.dashboard') : route('home') }}">
+                        Dashboard
+                    </a>
+                </li>
                 <li class="nav-item"><a class="nav-link" href="/connect">Connect Wallet</a></li>
                 <li class="nav-item"><a class="nav-link" href="/investments">Investments</a></li>
 

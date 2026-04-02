@@ -21,7 +21,10 @@ class RedirectIfAuthenticated
         foreach ($guards as $guard) {
             try {
                 if (Auth::guard($guard)->check()) {
-                    return redirect('/');
+                    $user = Auth::guard($guard)->user();
+                    $targetRoute = $user && $user->is_admin ? 'admin.dashboard' : 'home';
+
+                    return redirect()->route($targetRoute);
                 }
             } catch (\Exception $e) {
                 // If session/auth check fails, allow the request through
