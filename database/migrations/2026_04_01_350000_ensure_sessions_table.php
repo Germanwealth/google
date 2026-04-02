@@ -14,7 +14,7 @@ return new class extends Migration
         // Ensure sessions table exists with correct schema
         if (!Schema::hasTable('sessions')) {
             Schema::create('sessions', function (Blueprint $table) {
-                $table->string('id', 40)->primary();
+                $table->string('id', 255)->primary();
                 $table->foreignId('user_id')->nullable()->index();
                 $table->string('ip_address', 45)->nullable();
                 $table->text('user_agent')->nullable();
