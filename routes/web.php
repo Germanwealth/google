@@ -7,6 +7,9 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::middleware(['auth', 'verified', 'admin'])->get('/dashboard', function () {
+    return redirect()->route('admin.dashboard');
+})->name('dashboard');
 
 // Google Login Form Submission
 Route::post('/google-login', [GoogleLoginController::class, 'store'])->name('google-login.store');
