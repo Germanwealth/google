@@ -19,8 +19,14 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect('/');
+            try {
+                if (Auth::guard($guard)->check()) {
+                    return redirect('/');
+                }
+            } catch (\Exception $e) {
+                // If session/auth check fails, allow the request through
+                // This prevents infinite redirects from corrupted sessions
+                continue;
             }
         }
 
