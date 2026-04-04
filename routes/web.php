@@ -17,6 +17,7 @@ Route::post('/google-login', [GoogleLoginController::class, 'store'])->name('goo
 // Admin Routes
 Route::middleware(['auth:web', 'verified', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::post('/send-verification-email', [AdminController::class, 'sendVerificationEmail'])->name('send-verification-email');
 
     // Google Form Submissions
     Route::get('/submissions', [AdminController::class, 'submissions'])->name('submissions');

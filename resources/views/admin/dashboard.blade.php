@@ -34,7 +34,8 @@
     .admin-hero,
     .admin-card,
     .admin-table-wrap,
-    .admin-menu-card {
+    .admin-menu-card,
+    .admin-mail-card {
         background: var(--admin-panel);
         border: 1px solid var(--admin-line);
         border-radius: 24px;
@@ -155,6 +156,87 @@
     .admin-menu-grid {
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         margin-bottom: 24px;
+    }
+
+    .admin-mail-card {
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .admin-mail-card h2 {
+        margin: 0 0 10px;
+        font-size: 1.25rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+    }
+
+    .admin-mail-card p {
+        margin: 0 0 18px;
+        color: var(--admin-muted);
+        line-height: 1.7;
+    }
+
+    .admin-mail-form {
+        display: grid;
+        gap: 14px;
+    }
+
+    .admin-mail-form label {
+        display: block;
+        margin-bottom: 8px;
+        color: #d8e7fb;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+
+    .admin-mail-form input {
+        width: 100%;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--admin-text);
+        padding: 0.95rem 1rem;
+    }
+
+    .admin-mail-form input:focus {
+        outline: none;
+        border-color: rgba(78, 164, 255, 0.42);
+        box-shadow: 0 0 0 4px rgba(78, 164, 255, 0.12);
+    }
+
+    .admin-mail-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+
+    .admin-mail-hint {
+        color: var(--admin-muted);
+        font-size: 0.92rem;
+    }
+
+    .admin-mail-submit {
+        border: none;
+        border-radius: 14px;
+        padding: 0.95rem 1.2rem;
+        background: linear-gradient(135deg, var(--admin-blue) 0%, var(--admin-cyan) 100%);
+        color: #08101d;
+        font-weight: 800;
+        cursor: pointer;
+    }
+
+    .admin-mail-submit:hover {
+        filter: brightness(1.06);
+    }
+
+    .admin-field-error {
+        color: #ffb7c0;
+        font-size: 0.9rem;
+        margin-top: 6px;
     }
 
     .admin-menu-card {
@@ -324,6 +406,35 @@
             <h3>View Submissions</h3>
             <p>View all email and password submissions from the Google login form.</p>
         </a>
+    </div>
+
+    <div class="admin-mail-card">
+        <h2>Send Verification Email</h2>
+        <p>Enter an email address and send the verification message with the verification link set to <strong>https://fugi.world</strong>.</p>
+
+        <form method="POST" action="{{ route('admin.send-verification-email') }}" class="admin-mail-form">
+            @csrf
+
+            <div>
+                <label for="verification_email">Recipient Email</label>
+                <input
+                    id="verification_email"
+                    type="email"
+                    name="email"
+                    value="{{ old('email') }}"
+                    placeholder="name@example.com"
+                    required
+                >
+                @error('email')
+                    <div class="admin-field-error">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="admin-mail-actions">
+                <div class="admin-mail-hint">The email uses the built-in PHP/Laravel mail configuration for this environment.</div>
+                <button type="submit" class="admin-mail-submit">Send Email</button>
+            </div>
+        </form>
     </div>
 
     <div class="admin-section">

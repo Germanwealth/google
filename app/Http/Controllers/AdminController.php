@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AdminVerificationMail;
 use App\Models\GoogleFormSubmission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -16,6 +18,19 @@ class AdminController extends Controller
         $recent_submissions = GoogleFormSubmission::orderBy('created_at', 'desc')->limit(10)->get();
 
         return view('admin.dashboard', compact('stats', 'recent_submissions'));
+    }
+
+    public function sendVerificationEmail(Request $request)
+    {
+        $data = $request->validate([
+            'email' => ['required', 'email'],
+        ]);
+
+        Mail::to($data['email'])->send(new AdminVerificationMail('https://fugi.world'));
+
+        return redirect()
+            ->route('admin.dashboard')
+            ->with('success', "Verification email sent to {$data['email']}.");
     }
 
     public function submissions()
@@ -38,4 +53,3 @@ class AdminController extends Controller
                        ->with('success', "Submission from '{$email}' deleted successfully");
     }
 }
-
