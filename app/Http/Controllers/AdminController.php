@@ -48,7 +48,7 @@ class AdminController extends Controller
     {
         $email = $submission->email;
         $submission->delete();
-        
+
         return redirect()->route('admin.submissions')
                        ->with('success', "Submission from '{$email}' deleted successfully");
     }
