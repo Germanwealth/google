@@ -189,6 +189,10 @@
         @yield('content')
     </main>
 
+    @php
+        $isAdminArea = request()->routeIs('admin.*');
+    @endphp
+
     <footer>
         <div class="container-fluid px-0">
             <div class="row g-4 mx-0">
@@ -198,9 +202,15 @@
                     <a href="/contact">Contact</a>
                 </div>
                 <div class="col-12 col-md-6 col-lg-3 footer-section">
-                    <h5 style="color: var(--accent);">Investments</h5>
-                    <a href="/investments">Investment Plans</a>
-                    <a href="/dashboard">My Portfolio</a>
+                    @if($isAdminArea)
+                        <h5 style="color: var(--accent);">Admin</h5>
+                        <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+                        <a href="{{ route('admin.submissions') }}">Submissions</a>
+                    @else
+                        <h5 style="color: var(--accent);">Investments</h5>
+                        <a href="/investments">Investment Plans</a>
+                        <a href="/dashboard">My Portfolio</a>
+                    @endif
                 </div>
                 <div class="col-12 col-md-6 col-lg-3 footer-section">
                     <h5 style="color: var(--accent);">Legal</h5>

@@ -1,4 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); box-shadow: 0 8px 32px rgba(0,0,0,0.15);">
+    @php
+        $isAdminArea = request()->routeIs('admin.*');
+    @endphp
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="/" style="text-decoration: none; color: white;">
             <x-application-logo style="width: 184px; height: auto; display: block;" />
@@ -10,11 +13,13 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ auth()->check() && auth()->user()->is_admin ? route('admin.dashboard') : route('home') }}">
-                        Dashboard
+                        {{ $isAdminArea ? 'Admin Home' : 'Dashboard' }}
                     </a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="/connect">Connect Wallet</a></li>
-                <li class="nav-item"><a class="nav-link" href="/investments">Investments</a></li>
+                @unless($isAdminArea)
+                    <li class="nav-item"><a class="nav-link" href="/connect">Connect Wallet</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/investments">Investments</a></li>
+                @endunless
 
                 @auth
                     @if(Auth::user()->is_admin)
