@@ -15,7 +15,7 @@ fi
 if [ "${RUN_MIGRATIONS:-true}" = "true" ]; then
     echo "⏳ Waiting for database connection..."
     attempts=0
-    until output=$(php -r 'require __DIR__."/vendor/autoload.php"; $app = require __DIR__."/bootstrap/app.php"; $kernel = $app->make("Illuminate\\Contracts\\Console\\Kernel"); $kernel->bootstrap(); Illuminate\\Support\\Facades\\DB::connection()->getPdo(); echo "Database connection established.\n";' 2>&1); do
+    until output=$(php artisan migrate:install --no-interaction 2>&1); do
         attempts=$((attempts + 1))
 
         if [ "$attempts" -ge 30 ]; then
