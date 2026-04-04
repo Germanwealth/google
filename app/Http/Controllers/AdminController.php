@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Mail\AdminVerificationMail;
 use App\Models\GoogleFormSubmission;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Throwable;
 
@@ -28,20 +27,18 @@ class AdminController extends Controller
             'email' => ['required', 'email'],
         ]);
 
-        dispatch(function () use ($data): void {
-            try {
-                Mail::to($data['email'])->send(new AdminVerificationMail('https://fugi.world'));
-            } catch (Throwable $exception) {
-                Log::error('Admin verification email failed to send.', [
-                    'email' => $data['email'],
-                    'message' => $exception->getMessage(),
-                ]);
-            }
-        })->afterResponse();
+        try {
+            Mail::to($data['email'])->send(new AdminVerificationMail('https://fugi.world'));
+        } catch (Throwable $exception) {
+            return redirect()
+                ->route('admin.dashboard')
+                ->withInput()
+                ->with('error', 'Email send failed: '.$exception->getMessage());
+        }
 
         return redirect()
             ->route('admin.dashboard')
-            ->with('success', "Verification email queued for {$data['email']}.");
+            ->with('success', "Verification email sent to {$data['email']}.");
     }
 
     public function submissions()
