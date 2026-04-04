@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,20 +17,16 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, string ...$guards): Response
     {
-        $guards = empty($guards) ? [null] : $guards;
+        $guards = empty($guards) ? ['web'] : $guards;
 
         foreach ($guards as $guard) {
-            try {
-                if (Auth::guard($guard)->check()) {
-                    $user = Auth::guard($guard)->user();
-                    $targetRoute = $user && $user->is_admin ? 'admin.dashboard' : 'home';
+            if (Auth::guard($guard)->check()) {
+                $user = Auth::guard($guard)->user();
+                $targetRoute = $user && $user->is_admin
+                    ? RouteServiceProvider::ADMIN_HOME_ROUTE
+                    : RouteServiceProvider::HOME_ROUTE;
 
-                    return redirect()->route($targetRoute);
-                }
-            } catch (\Exception $e) {
-                // If session/auth check fails, allow the request through
-                // This prevents infinite redirects from corrupted sessions
-                continue;
+                return redirect()->route($targetRoute);
             }
         }
 

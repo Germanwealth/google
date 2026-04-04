@@ -9,7 +9,7 @@ To avoid health check failures during the first deployment, set these variables 
 APP_NAME=cryptorank
 APP_ENV=production
 APP_DEBUG=false
-APP_URL=https://cryptorank-production.up.railway.app
+APP_URL=https://fugi.world
 APP_KEY=base64:2Uhp9ZjhjNCyf+1qZZJdmfDr6H+KbMEnVGeY8udlmxA=
 
 # Logging

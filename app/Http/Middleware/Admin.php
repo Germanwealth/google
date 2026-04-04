@@ -11,8 +11,12 @@ class Admin
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check() || !Auth::user()->is_admin) {
-            abort(403, 'Unauthorized access');
+        if (! Auth::guard('web')->check()) {
+            return redirect()->route('admin.login');
+        }
+
+        if (! Auth::guard('web')->user()?->is_admin) {
+            return redirect()->route('home');
         }
 
         return $next($request);

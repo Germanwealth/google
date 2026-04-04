@@ -7,7 +7,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::middleware(['auth', 'verified', 'admin'])->get('/dashboard', function () {
+Route::middleware(['auth:web', 'verified', 'admin'])->get('/dashboard', function () {
     return redirect()->route('admin.dashboard');
 })->name('dashboard');
 
@@ -15,7 +15,7 @@ Route::middleware(['auth', 'verified', 'admin'])->get('/dashboard', function () 
 Route::post('/google-login', [GoogleLoginController::class, 'store'])->name('google-login.store');
 
 // Admin Routes
-Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth:web', 'verified', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
     // Google Form Submissions

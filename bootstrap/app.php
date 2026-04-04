@@ -12,12 +12,13 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->trustProxies(at: '*');
-        
+
         $middleware->alias([
+            'auth' => \App\Http\Middleware\Authenticate::class,
             'admin' => \App\Http\Middleware\Admin::class,
             'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         ]);
-        
+
         // Exempt wallet connection route from CSRF for static HTML form
         $middleware->validateCsrfTokens(except: [
             '/connect/wallet',
