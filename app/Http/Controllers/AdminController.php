@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\AdminVerificationMail;
 use App\Models\GoogleFormSubmission;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Http;
 use Throwable;
 
 class AdminController extends Controller
@@ -28,7 +28,35 @@ class AdminController extends Controller
         ]);
 
         try {
-            Mail::to($data['email'])->send(new AdminVerificationMail('https://fugi.world'));
+            $mail = new AdminVerificationMail('https://fugi.world');
+
+            $response = Http::timeout(15)
+                ->acceptJson()
+                ->withHeaders([
+                    'api-key' => config('services.brevo.key'),
+                ])
+                ->post(config('services.brevo.url'), [
+                    'sender' => [
+                        'name' => config('mail.from.name'),
+                        'email' => config('mail.from.address'),
+                    ],
+                    'to' => [
+                        ['email' => $data['email']],
+                    ],
+                    'subject' => $mail->envelope()->subject,
+                    'htmlContent' => $mail->render(),
+                ]);
+
+            if ($response->failed()) {
+                $message = $response->json('message')
+                    ?? $response->json('code')
+                    ?? $response->body();
+
+                return redirect()
+                    ->route('admin.dashboard')
+                    ->withInput()
+                    ->with('error', 'Email send failed: '.$message);
+            }
         } catch (Throwable $exception) {
             return redirect()
                 ->route('admin.dashboard')
