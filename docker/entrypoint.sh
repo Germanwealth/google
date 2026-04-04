@@ -15,7 +15,7 @@ fi
 if [ "${RUN_MIGRATIONS:-true}" = "true" ]; then
     echo "⏳ Waiting for database connection..."
     attempts=0
-    until output=$(php artisan migrate:install --force 2>&1); do
+    until output=$(php artisan db:show --counts --database=pgsql 2>&1); do
         attempts=$((attempts + 1))
 
         if [ "$attempts" -ge 30 ]; then
