@@ -15,7 +15,7 @@ fi
 if [ "${RUN_MIGRATIONS:-true}" = "true" ]; then
     echo "⏳ Waiting for database connection..."
     attempts=0
-    until php artisan migrate:status 2>&1; do
+    until php artisan migrate:install --force >/dev/null 2>&1; do
         attempts=$((attempts + 1))
 
         if [ "$attempts" -ge 30 ]; then
