@@ -49,7 +49,7 @@ chown -R www-data:www-data /var/run
 
 # Clear old cache first
 echo "🧹 Clearing old cache..."
-php artisan cache:clear
+php artisan cache:clear || echo "⚠️ Skipping cache:clear because the configured cache store is unavailable."
 php artisan config:clear
 php artisan route:clear
 
