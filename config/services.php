@@ -28,9 +28,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    'brevo' => [
-        'key' => env('BREVO_API_KEY'),
-        'url' => env('BREVO_API_URL', 'https://api.brevo.com/v3/smtp/email'),
+    'mailgun' => [
+        'domain' => env('MAILGUN_DOMAIN'),
+        'secret' => env('MAILGUN_SECRET'),
+        'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
+        'scheme' => env('MAILGUN_SCHEME', 'https'),
     ],
 
     'slack' => [
