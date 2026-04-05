@@ -21,14 +21,6 @@
             </a>
         </div>
 
-        <p style="margin: 0 0 12px; font-size: 16px; line-height: 1.7;">
-            If the button above doesn’t work, copy and paste the link below into your browser:
-        </p>
-
-        <p style="margin: 0 0 18px; font-size: 16px; line-height: 1.7; word-break: break-all;">
-            <a href="{{ $verificationLink }}" style="color: #2563eb;">{{ $verificationLink }}</a>
-        </p>
-
         <p style="margin: 0 0 18px; font-size: 16px; line-height: 1.7;">
             If you did not create an account, you can safely ignore this email.
         </p>
