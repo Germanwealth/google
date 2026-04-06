@@ -8,8 +8,11 @@
 <body style="margin: 0; padding: 0; background-color: #f6f8fc; color: #202124; font-family: Arial, Helvetica, sans-serif;">
     @php
         $homeUrl = config('app.url');
-        $logoUrl = asset('mylogo.png');
         $appName = config('app.name', 'Google');
+        $logoPath = public_path('mylogo.png');
+        $logoUrl = isset($message) && file_exists($logoPath)
+            ? $message->embed($logoPath)
+            : asset('mylogo.png');
     @endphp
 
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f6f8fc; margin: 0; padding: 32px 16px;">
